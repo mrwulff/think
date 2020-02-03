@@ -1,285 +1,172 @@
-import mechanize
-#import ssl
-import os
-import requests
-
-'''
-import urllib
-#ssl._create_default_https_context = ssl._create_unverified_context
-page=0
-full_html=''
-full_list=[]
-tot=str(len(full_list))
-debug=True
-from datetime import datetime
-past=False
-box=''
-confirm_list=[]
-browser=''
-now=''
-'''
-print dir(requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS)
-print requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS
-#requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS=('ALL:@SECLEVEL=0')
-#requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS=('DES-CBC3-SHA')
-print requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS
-#from urllib.requests import urlopen
-import ssl
-print(ssl.OPENSSL_VERSION_INFO)
-#print 'kevin'
-#url = 'https://www.thinkrhino.com/employee/lasvegas/index.aspx'
-#print dir(ssl)
-#ctx=ssl.SSLContext(ssl.PROTOCOL_TLS)
-#print dir(ctx)
-#ssl._create_default_https_context = ssl._create_unverified_context
-ssl.verify=False
-#print "OMG",ssl._DEFAULT_CIPHERS
-#ssl._DEFAULT_CIPHERS = ('DES-CBC3-SHA')
-#ssl._DEFAULT_CIPHERS = ('ALL:@SECLEVEL=0')
-#ctx.get_ciphers()
-#print "WTF",ssl._DEFAULTCIPHERS
-#ctx = ssl.SSLContext()
-#ctx.set_ciphers('ALL:@SECLEVEL=0')
-#ctx.set_ciphers('ALL:@SECLEVEL=0')
-url = 'https://www.thinkrhino.com/employee/lasvegas/index.aspx'
-#r=requests.get(url)
-#print r.headers
-#print (len(r.text))
-#print r.text
-#b=open('temp23.txt','w')
-#b.close()
-#value=unicode(r.text,'utf-8')
-#v=r.text
-#v=v.encode('utf-8')
-#print v
-#b=open('temp23.txt','wb')
-#b.write(v)
-'''
-payload={'emailaddress': 'kevincwulff@gmail.com','mypassword':'blink182'}
-r=requests.post("https://www.thinkrhino.com/employee/lasvegas/index.aspx",data=payload)
-v= r.text.encode('utf-8')
-print v
-
-b=open('temp23.txt','wb')
-b.write(v)
-'''
-
-
+# _*_ coding:utf-8 _*_
+from __future__ import unicode_literals
 
 from kivy.app import App
-from kivy.properties import BooleanProperty
-from kivy.properties import NumericProperty
-from kivy.properties import ObjectProperty
-from kivy.uix.behaviors import FocusBehavior
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.uix.popup import Popup
-from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.recycleview import RecycleView
-from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.uix.label import Label
+from kivy.uix.gridlayout import GridLayout
+from kivy.properties import BooleanProperty
+from kivy.uix.recycleboxlayout import RecycleBoxLayout
+from kivy.uix.behaviors import FocusBehavior
+from kivy.uix.recycleview.layout import LayoutSelectionBehavior
+from kivy.clock import Clock
 from kivy.uix.screenmanager import ScreenManager, Screen
-
-
-
-class CustomScreen(Screen):
-    hue = NumericProperty(0)
-
-
-class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
-                                 RecycleBoxLayout):
-    ''' Adds selection and focus behaviour to the view. '''
-
-class SelectableLabel(RecycleDataViewBehavior, GridLayout,Label):
-    ''' Add selection support to the Label '''
-    index = None
-    selected = BooleanProperty(True)
-    selectable = BooleanProperty(True)
-    cols = 6
-
-    def refresh_view_attrs(self, rv, index, data):
-        ''' Catch and handle the view changes '''
-        self.index = index
-        #print index
-        self.label1_text = data['label1']['text']
-        self.label2_text = data['label2']['text']
-        self.label3_text = data['label3']['text']
-        self.label4_text = data['label4']['text']
-        self.label5_text = data['label5']['text']
-        self.label6_text = data['label6']['text']
-        #self.label2_text = data['label2']['text']
-        #self.ids['id_label3'].text = data['label3']['text']  # As an alternate method of assignment
-        return super(SelectableLabel, self).refresh_view_attrs(
-            rv, index, data)
-
-    def on_touch_down(self, touch):
-        ''' Add selection on touch down '''
-        if super(SelectableLabel, self).on_touch_down(touch):
-            return True
-        if self.collide_point(*touch.pos) and self.selectable:
-            return self.parent.select_with_touch(self.index, touch)
-
-    def apply_selection(self, rv, index, is_selected):
-        ''' Respond to the selection of items in the view. '''
-        self.selected = is_selected
-        if is_selected:
-            popup = Popup(title='Test popup',
-                          content=Label(text='Hello world'),
-                          size_hint=(None, None), size=(400, 400))
-            popup.open()
-            #pass
-            #print("selection changed to {0}".format(rv.data[index]))
-        else:
-            pass
-            #print("selection removed for {0}".format(rv.data[index]))
-
-
-
-
-
-class FirstScreen():
-    pass
-class wow():
-    pass
-
-
-
+from kivy.storage.jsonstore import JsonStore
+import string
+import ssl
+import mechanize
 from functools import wraps
-class RV(Screen):
-
-    def parse():
-        '''
-        date1=''
-        time1=''
-        job1=''
-        show1=''
-        venue1=''
-        loc1=''
-        client1=''
-        type1=''
-        pos1=''
-        status1=''
-        notes1=''
-        '''
-
-        aaa = open('test2.html', 'r')
-        ab = aaa.read()
-        # print ab
-        ab, junk = split(ab, 'Back to previous page')
-        part = split(ab, '<tr')
-        x = 0
-        o = 0
-        for i in range(2, len(part) - 1):
-            # for i in range(1,5):
-            stuff = []
-            # print i,' LINE'
-            # print part[i]
-            # print part[i]
-            c = part[i]
-            c = split(c, '<')
-            # print part[i]
-            print
-            for d in range(len(c)):
-                # print c[d]
-                try:
-                    a, b = split(c[d], '">')
-                    # print b,
-                    stuff.append(b)
-                except:
-                    1
-                    # print c[d]
-                '''
-                try:
-                    a,b=split(c[d],'">')
-                    #print b
-                    if len(b)>0:
-                        #print b
-
-                        b=replace(b,'&nbsp;','   ')
-                        b=replace(b,';',';\n')
-
-                        stuff.append(b)
-
-                except:
-                    'crap'
+import os
+from bs4 import BeautifulSoup
 
 
-            print stuff
+
+
+items_1 = {'apple',}
+items_2 = {'dog', }
+print type(items_1),"WOWOWOWOWOWOOWOWOW"
+items_1.add('orange')
+items_2.add('fry')
+data={}
+
+gdate1={'',}
+gtime1={'',}
+gjob1={'',}
+gshow1={'',}
+gvenue1={'',}
+gloc1={'',}
+gclient1={'',}
+gtype1={'',}
+gpos1={'',}
+gstatus1={'',}
+gnotes1={'',}
+
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf8')
+
+import unicodedata
+
+
+
+def safeStr(obj):
+    try: return str(obj)
+    except UnicodeEncodeError:
+        return obj.encode('ascii', 'ignore').decode('ascii')
+    except: return ""
+
+
+
+def check( joob, date12, time12, venue12, loc12, show12, type12, status12, pos12, notes12, client12, job12):
+    global gdate1
+    gdate1.add(date12)
+
+    global gtime1
+    gtime1.add(time12)
+
+    global gvenue1
+    gvenue1.add(venue12)
+
+    global gloc1
+    gloc1.add(loc12)
+
+
+    print date12,time12,venue12,'LOCAL HERO'
+import io
+def parse():
     '''
-            print
-            stuff
-            if '\r\n\t\t\t' in stuff[0]:
-                stuff.remove('\r\n\t\t\t')
-                print
-                'FUCK YOUFF YOWRE'
-            try:
+    date1=''
+    time1=''
+    job1=''
+    show1=''
+    venue1=''
+    loc1=''
+    client1=''
+    type1=''
+    pos1=''
+    status1=''
+    notes1=''
+    '''
+    c = App.get_running_app().storage()
+    print((c))
+    a=open(c + 'cache.html', 'r')
+    s=''
+    for line in a.readlines():
+        if 'class="cell-noborder' in line:
+            s=s+line
+            print line
+    s=s.encode('utf-8').decode("ascii")
 
-                junk = stuff[13]
+    parsed_html = BeautifulSoup(s)
 
-                date1 = stuff[0 + o]
-                time1 = stuff[1 + o]
-                job1 = stuff[2 + o]
-                show1 = stuff[3 + o]
-                venue1 = stuff[4 + o]
-                loc1 = stuff[5 + o]
-                client1 = stuff[6 + o]
-                type1 = stuff[7 + o]
-                pos1 = stuff[8 + o]
-                status1 = stuff[10 + o]
-                notes1 = stuff[11 + o]
+    #from pyquery import PyQuery
+    #html = aaa
+    #pq = PyQuery(html)
+
+    '''
+        try:
+
+            junk = stuff[13]
+
+            date1 = stuff[0 + o]
+            time1 = stuff[1 + o]
+            job1 = stuff[2 + o]
+            show1 = stuff[3 + o]
+            venue1 = stuff[4 + o]
+            loc1 = stuff[5 + o]
+            client1 = stuff[6 + o]
+            type1 = stuff[7 + o]
+            pos1 = stuff[8 + o]
+            status1 = stuff[10 + o]
+            notes1 = stuff[11 + o]
 
 
-            except:
+        except:
 
-                date1 = stuff[0]
-                time1 = stuff[1]
-                job1 = stuff[2]
-                show1 = stuff[3]
-                venue1 = stuff[4]
-                loc1 = stuff[5]
-                client1 = stuff[6]
-                type1 = stuff[7]
-                pos1 = stuff[8]
-                status1 = stuff[10]
-                notes1 = stuff[11]
-                print
-                "SSDFSFSDFSDFSDF"
+            date1 = stuff[0]
+            time1 = stuff[1]
+            job1 = stuff[2]
+            show1 = stuff[3]
+            venue1 = stuff[4]
+            loc1 = stuff[5]
+            client1 = stuff[6]
+            type1 = stuff[7]
+            pos1 = stuff[8]
+            status1 = stuff[10]
+            notes1 = stuff[11]
+            print 'wfff'
+            "SSDFSFSDFSDFSDF"
+    '''
+    '''
 
-            # print junk
+        # print junk
+        print
+        date1
+
+        if date1 == 'Date' or date1 == '0':
+            # print 'init'
+            'junk'
+        else:
+            print date1, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
             print
             date1
+            try:
+                m, d, y = string.split(date1, '/')
+                date1 = y + '/' + m + '/' + d
+            except:
+                print date1
+                print die
+                #date1, 'SDLFKJ :SDLKFJ:SLDKFJ:SLKFDJ:LSKFD'
+    '''
 
-            if date1 == 'Date' or date1 == '0':
-                # print 'init'
-                'junk'
-            else:
-                print
-                date1, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
-                print
-                date1
-                try:
-                    m, d, y = split(date1, '/')
-                    date1 = y + '/' + m + '/' + d
-                except:
-                    print
-                    date1, 'SDLFKJ :SDLKFJ:SLDKFJ:SLKFDJ:LSKFD'
+    #joob = date1 + ' ' + time1 + ' ~ ' + venue1 + ' ~ ' + loc1 + ' ~ ' + show1 + ' ~  ' + client1 + ' ~ ' + type1 + ' ~ ' + pos1 + ' ~ ' + status1 + ' ~ ' + job1 + ' ~ ' + notes1
+    #print joob
 
-                joob = date1 + ' ' + time1 + ' ~ ' + venue1 + ' ~ ' + loc1 + ' ~ ' + show1 + ' ~  ' + client1 + ' ~ ' + type1 + ' ~ ' + pos1 + ' ~ ' + status1 + ' ~ ' + job1 + ' ~ ' + notes1
+    #check(joob, date1, time1, venue1, loc1, show1, type1, status1, pos1, notes1, client1, job1)
 
-                print
-                joob
-                check(joob, date1, time1, venue1, loc1, show1, type1, status1, pos1, notes1, client1)
 
-    pass
-class RaV(Screen):
-    pass
-class RVScreen(Screen):
-    pass
-
-class SettingScreen(Screen):
-    pass
-class LoginScreen(Screen):
+class FirstScreen(Screen):
     def sslwrap(self,func):
         @wraps(func)
         def bar(*args, **kw):
@@ -287,23 +174,6 @@ class LoginScreen(Screen):
             return func(*args, **kw)
 
         return bar
-
-
-
-
-    def getdate(self, msg):
-
-        today = date.today()
-
-        # print dir(self.ids.items)
-        self.lbl.text = str(today)
-    def loadcache(self,b,c,d):
-        c = App.get_running_app().storage()
-        print(dir(c))
-        b = open(str(c) + 'cache.html', 'r')
-        for line in b.readlines():
-            print line
-
     def login(self,b,c,d):
         print 'calculate'
         #import  urllib3
@@ -367,42 +237,143 @@ class LoginScreen(Screen):
         print (aa)
 
         c = App.get_running_app().storage()
-        print(dir(c))
+        print((c))
         b = open(str(c) + 'cache.html', 'w')
         b.write(aa)
         b.close()
 
 
-        return aa
+
+
+
+
+
+    def loadcache(self,a, b,c):
+        self.parse()
+        print date1
+        #a, b
+    pass
+
+class SecondScreen(Screen):
+    pass
+class ThirdScreen(Screen):
+    pass
+
+class FourthScreen(Screen):
+    pass
+
+sm = ScreenManager()
+sm.add_widget(FirstScreen())
+sm.add_widget(SecondScreen())
+sm.add_widget(ThirdScreen())
+sm.add_widget(FourthScreen())
 
 
 
 class MyScreenManager(ScreenManager):
-    pass
 
-class SwitchingScreenApp(App):
-    '''
-    def build_config(self, config):
-        config.setdefaults('section1', {
-            'key1': 'value1',
-            'key2': '42'
-        })
-    '''
+    def __init__(self, **kwargs):
+        super(MyScreenManager, self).__init__(**kwargs)
+        Clock.schedule_once(self.screen_switch_one, 2)
 
+    def screen_switch_one(self, dt):
+        self.current = '_first_screen_'
+        #Clock.schedule_once(self.screen_switch_two, 2)
+
+    def screen_switch_two(self, dt):
+        self.current = '_second_screen_'
+        self.ids.first_screen.ids.first_screen_label.text = "Hi I'm The Fifth Screen"
+        #Clock.schedule_once(self.screen_switch_three, 2)
+
+    def screen_switch_three(self, dt):
+        self.current = '_third_screen_'
+        #Clock.schedule_once(self.screen_switch_four, 2)
+
+    def screen_switch_four(self, dt):
+        self.current = '_fourth_screen_'
+        #Clock.schedule_once(self.screen_switch_one, 2)
+
+
+
+
+
+class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
+                                 RecycleBoxLayout):
+    ''' Adds selection and focus behaviour to the view. '''
+
+
+class SelectableLabel(RecycleDataViewBehavior, GridLayout):
+    ''' Add selection support to the Label '''
+    index = None
+    selected = BooleanProperty(False)
+    selectable = BooleanProperty(True)
+    cols = 4
+
+    def refresh_view_attrs(self, rv, index, data):
+        ''' Catch and handle the view changes '''
+        self.index = index
+        self.label1_text = str(index)
+        #self.label2_text = data['label2']['text']
+        #self.ids['id_label1'].text = data['label1']['text']  # As an alternate method of assignment
+        self.ids['id_label2'].text = data['label2']['text']  # As an alternate method of assignment
+        self.ids['id_label3'].text = data['label3']['text']  # As an alternate method of assignment
+        self.ids['id_label4'].text = data['label4']['text']  # As an alternate method of assignment
+        return super(SelectableLabel, self).refresh_view_attrs(
+            rv, index, data)
+
+    def on_touch_down(self, touch):
+        ''' Add selection on touch down '''
+        if super(SelectableLabel, self).on_touch_down(touch):
+            return True
+        if self.collide_point(*touch.pos) and self.selectable:
+            return self.parent.select_with_touch(self.index, touch)
+
+    def apply_selection(self, rv, index, is_selected):
+        ''' Respond to the selection of items in the view. '''
+        self.selected = is_selected
+        if is_selected:
+            print("selection changed to {0}".format(rv.data[index]))
+
+            print len(gdate1),'date1'
+            print len(gtime1),'gtime1'
+            print len(gjob1),'gjob1'
+            print len(gvenue1),'gvenue1'
+            print len(rv.data),'data'
+        else:
+            print("selection removed for {0}".format(rv.data[index]))
+
+
+class RV(RecycleView):
+    def __init__(self, **kwargs):
+        self.data = []
+        parse()
+        print "TESTTESTTESTTEST"
+
+        super(RV, self).__init__(**kwargs)
+        #global time1
+        #global date1
+        #global job1
+        #global venue1
+        #print time1
+        print gvenue1
+        paired_iter = zip(gtime1, gdate1,gvenue1)
+        print paired_iter,"HOLYCRAPMAN"
+        #
+        for i1, i2,i3 in paired_iter:
+            d = {'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3}}
+            self.data.append(d)
+            print 'wtf man'
+        # can also be performed in a complicated one liner for those who like it tricky
+        # self.data = [{'label2': {'text': i1}, 'label3': {'text': i2}} for i1, i2 in zip(items_1, items_2)]
+
+
+
+class TestApp(App):
+    def build(self):
+
+        return MyScreenManager()
     def storage(self):
         return self.user_data_dir
 
-    def build(self):
-        # a=self.get_application_config()
-        # self.get_application
-        # print ((a),'omg')
-        # print (type(a))
-        # b=open(a,'w')
-        # b.write('omg')
-        # b.close()
-
-        return MyScreenManager()
-
-
-if __name__ == "__main__":
-    SwitchingScreenApp().run()
+if __name__ == '__main__':
+    TestApp().run()
