@@ -13,11 +13,15 @@
 
 
 <MyScreenManager>:
+    id:manager
+    FourthScreen:
     FirstScreen:
         id: first_screen
-    FourthScreen:
+
     SecondScreen:
+        id:second_screen
     ThirdScreen:
+
 
 
 <FirstScreen>:
@@ -91,9 +95,155 @@
 
 <SecondScreen>:
     name: '_second_screen_'
-    Label:
-        id: second_screen_label
-        text: "Hi I'm The Second Screen"
+    BoxLayout:
+        #default_size_hint:.2,.2
+        orientation:"vertical"
+
+
+        Label:
+            id: second_screen_label
+            size_hint:.13,None
+            background_color:0,.4,0,.8
+            #size_hint:.13,None
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label
+            id: second_screen_label2
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label:
+            id: second_screen_label3
+            #ize_hint:.13,None
+            background_color:0,.4,0,.8
+            #size_hint:.13,None
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label
+            id: second_screen_label4
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label:
+            id: second_screen_label5
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            #size_hint:.13,None
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label
+            id: second_screen_label6
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+
+        Label:
+            id: second_screen_label7
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            #size_hint:.13,None
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label
+            id: second_screen_label8
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label:
+            id: second_screen_label9
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            #size_hint:.13,None
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label
+            id: second_screen_label10
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label:
+            id: second_screen_label11
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            size_hint:.13,None
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        Label
+            id: second_screen_label12
+            size_hint:1,.6
+            background_color:0,.4,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+
+        BLabel
+            id: second_screen_label13
+            #size_hint:.13,None
+            background_color:0,.4,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        BLabel
+            id: second_screen_label14
+            #size_hint:.13,None
+            background_color:0,.2,0,.8
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+
+
+        Button:
+            size_hint:.5,.3
+            text:'back'
+            on_press:
+                #root.__init__(self)
+                root.manager.transition.direction = 'down'
+                root.manager.current = '_fourth_screen_'
+
 
 <ThirdScreen>:
     name: '_third_screen_'
@@ -114,7 +264,7 @@
             on_press:
                 #root.__init__(self)
                 root.manager.transition.direction = 'down'
-                root.manager.current = '_fourth_screen_'
+                root.manager.current = '_first_screen_'
     #Label:
     #    id: fourth_screen_label
     #    text: "Hi I'm The Fourth Screen"
@@ -141,26 +291,31 @@
     label7_text: 'label 7 text'
     label8_text: 'label 8 text'
     label9_text: 'label 9 text'
+    label10_text: 'label 10 text'
+    label11_text: 'label 11 text'
+
 
     #pos: self.pos
     #size: self.size
-    BLabel:
+    Button:
     #DATE
         #texture_size:.5,.5
         #text_size:self.size
         text_sdize:None,None
         id: id_label1
         text: root.label1_text
-        size_hint:.2,None
+        size_hint:.23,None
         #size:10,10
         #width:200
         #height:100
-        background_color:1,.4,0,.8
+        background_color:1,.3,0,.8
         #halign:'left'
         #valign:'top'
-        font_size:20
+        font_size:30
         #padding:0
         #text_size:100,None
+        on_press:
+            root.manager.current='wow'
 
     BLabel:
     #TIME
@@ -168,9 +323,9 @@
         #text_size:root.width,None
         id: id_label2
         text: root.label2_text
-        size_hint:.15,None
+        size_hint:.13,None
         background_color:0,.4,0,.8
-        font_size:20
+        font_size:30
 
     BLabel:
     #Type
@@ -180,8 +335,8 @@
         text: root.label8_text
         #size_hint:50,50
         background_color:0,.4,1,.8
-        size_hint:.14,None
-        font_size:20
+        size_hint:.12,None
+        font_size:30
 
 
 
@@ -191,9 +346,21 @@
         #text_size:root.width,None
         id: id_label9
         text: root.label9_text
-        size_hint:.2,None
-        background_color:.4,.4,0,.8
-        font_size:20
+        size_hint:.15,None
+        background_color:.4,.2,.2,.8
+        font_size:30
+    BLabel:
+    #show
+        id: id_label4
+        #text: root.label4_text
+        #size_hint:170,170
+        background_color:1,.8,1,.8
+        size_hint:.4,None
+        font_size:30
+        text_size:self.size
+        halign:'left'
+        valign: 'center'
+        padding:5,0
     BLabel:
     #Place
         #size:self.texture_size
@@ -202,7 +369,12 @@
         text: root.label5_text
         #size_hint:50,50
         background_color:.5,.3,1,.8
-        size_hint:None,1
+        size_hint:.7,None
+        font_size:30
+        text_size:self.size
+        halign:'left'
+        valign: 'center'
+        padding:5,0
 
     BLabel:
         id: id_label6
@@ -210,24 +382,38 @@
         #size_hint:170,170
         background_color:1,.4,.2,.8
         size_hint:.6,None
+        font_size:30
+        text_size:self.size
+        halign:'left'
+        valign: 'center'
+        padding:5,0
+
     BLabel:
-        id: id_label7
-        text: root.label7_text
+        id: id_label11
+        text: root.label11_text
         #size_hint:170,170
         background_color:.5,.4,0,.8
         size_hint:.5,None
+        font_size:60
+        text_size:self.size
+        halign:'left'
+        valign: 'center'
+        padding:5,0
+
     BLabel:
+    #jobid
         id: id_label3
         text: root.label3_text
         #size_hint:170,170
-        background_color:1,.4,0,.8
-        size_hint:.1,None
-    BLabel:
-        id: id_label4
-        #text: root.label4_text
-        #size_hint:170,170
-        background_color:1,.8,1,.8
+        background_color:1,1,1,.8
         size_hint:.2,None
+        font_size:30
+        text_size:self.size
+        halign:'left'
+        valign: 'center'
+        padding:5,0
+
+
 
 <RV>:
     name: '_fourth_screen3_'
@@ -239,8 +425,8 @@
         default_text_size:10
         height: self.minimum_height
         orientation: 'vertical'
-        multiselect: True
-        touch_multiselect: True
+        multiselect: False
+        touch_multiselect: False
         size_hint_y: None
         size_hint_x: 3
         height: self.minimum_height

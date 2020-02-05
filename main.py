@@ -108,74 +108,88 @@ def parse():
     '''
     c = App.get_running_app().storage()
     print((c))
-    with io.open(c + 'cache.html', 'r',encoding='utf-8') as f:
+    go=True
+    try:
+        with io.open(c + 'cache.html', 'r',encoding='utf-8') as f:
 
-        aaa=f.read()
+            aaa=f.read()
+    except:
+        go=False
+        pass
 
+    if go==True:
+        #print type(aaa)
+        aaa=aaa.replace(u'\u2019',"'")
+        aaa=aaa.replace(u'\xa9','c')
+        aaa=aaa.replace('©','cc')
+        #print aaa
+        #print aaa
+        #from pyquery import PyQuery
+        #html = aaa
+        #pq = PyQuery(html)
+        soup = BeautifulSoup(aaa, 'html.parser')
+        #print(soup.prettify())
+        a= list(soup.children)
+        zz= soup.select('tr')
+        #print zz
+        #print len(zz)
+        onejob=[]
+        print type(onejob)
+        onejob=[]
+        print type(onejob)
+        for g in range(len(zz)):
+            # print g/14,(g%14)-1,zz[g]
+            # print type(zz)
+            a2 = (zz[g])
+            # print dir(a2)
+            az3 = list(a2.children)
+            # print az3
+            job = []
+            for j in range(len(az3)):
 
-    #print type(aaa)
-    aaa=aaa.replace(u'\u2019',"'")
-    aaa=aaa.replace(u'\xa9','c')
-    aaa=aaa.replace('©','cc')
-    #print aaa
-    #print aaa
-    #from pyquery import PyQuery
-    #html = aaa
-    #pq = PyQuery(html)
-    soup = BeautifulSoup(aaa, 'html.parser')
-    #print(soup.prettify())
-    a= list(soup.children)
-    zz= soup.select('tr')
-    #print zz
-    #print len(zz)
-    onejob=[]
-    print type(onejob)
-    onejob=[]
-    print type(onejob)
-    for g in range(len(zz)):
-        #print g/14,(g%14)-1,zz[g]
-        #print type(zz)
-        a2=(zz[g])
-        #print dir(a2)
-        az3=list(a2.children)
-        #print az3
-        job = []
-        for j in range(len(az3)):
-
-            az4= az3[j]
-            try:
-                #print az4.text
-                job.append(az4.text)
-                #onejob[g]=appendaz4.text
-            except:
-                ''
-                #print az4,'loll'
-            #print dir(az4)
-        print len(job)
-        onejob.append(job)
-    #print onejob
-        #print g
-    for q in range(1,len(onejob[0])-1):
-        #items_1.add( onejob[q][1])
-        #items_2.add(onejob[q][2])
-        #items_3.add(onejob[q][3])
-        #items_4.add(onejob[q][4])
-        items_0.append(onejob[q][0])
-        items_1.append( onejob[q][1])
-        items_2.append(onejob[q][2])
-        items_3.append(onejob[q][3])
-        items_4.append(onejob[q][4])
-        items_5.append(onejob[q][5])
-        items_6.append(onejob[q][6])
-        items_7.append(onejob[q][7])
-        items_8.append(onejob[q][8])
-        items_9.append(onejob[q][9])
-        items_10.append(onejob[q][10])
-        items_11.append(onejob[q][11])
-        items_12.append(onejob[q][12])
-        items_13.append(onejob[q][13])
-        #items_14.append(onejob[q][14])
-    '''
+                az4 = az3[j]
+                try:
+                    # print az4.text
+                    job.append(az4.text)
+                    # onejob[g]=appendaz4.text
+                except:
+                    ''
+                    # print az4,'loll'
+                # print dir(az4)
+            print
+            len(job)
+            onejob.append(job)
+        # print onejob
+        # print g
+        if len(onejob)>0:
+            for q in range(1,len(onejob[0])-1):
+                #items_1.add( onejob[q][1])
+                #items_2.add(onejob[q][2])
+                #items_3.add(onejob[q][3])
+                #items_4.add(onejob[q][4])
+                items_0.append(onejob[q][0])
+                items_1.append( onejob[q][1])
+                items_2.append(onejob[q][2])
+                items_3.append(onejob[q][3])
+                items_4.append(onejob[q][4])
+                items_5.append(onejob[q][5])
+                items_6.append(onejob[q][6])
+                items_7.append(onejob[q][7])
+                items_8.append(onejob[q][8])
+                items_9.append(onejob[q][9])
+                items_10.append(onejob[q][10])
+                items_11.append(onejob[q][11])
+                items_12.append(onejob[q][12])
+                items_13.append(onejob[q][13])
+                #items_14.append(onejob[q][14])
+        for z in range(len(items_10)):
+            t= items_10[z]
+            print type(t)
+            if t==u'Confirmed':
+                print 'wtf'
+                t='WTF'
+                items_10[z]='✔'
+        '''
         try:
 
             junk = stuff[13]
@@ -345,6 +359,29 @@ class FirstScreen(Screen):
     pass
 
 class SecondScreen(Screen):
+    #def __init__(self):
+    #    print 'jesus'
+    def wow(self):
+        #print a
+        #print'omg'
+        print self
+        #print dir(self)
+        print self.manager
+        print(dir(self.manager))
+        print dir(self.manager.screen_names)
+        #self.lbl1.text = 'wo2w'
+        self.random_number = items_1[3]
+        pass
+
+    print dir(App.get_running_app()),'trtr'
+
+    app = App.get_running_app()
+    print app,'808'
+    print (dir(app)),'9009'
+    #item_1=['w']*4
+    #random_number = item_1[3]
+
+    print 'fuck'
     pass
 class ThirdScreen(Screen):
     pass
@@ -370,9 +407,34 @@ class MyScreenManager(ScreenManager):
         self.current = '_first_screen_'
         #Clock.schedule_once(self.screen_switch_two, 2)
 
-    def screen_switch_two(self, dt):
+    def screen_switch_two(self, dt,index):
         self.current = '_second_screen_'
-        self.ids.first_screen.ids.first_screen_label.text = "Hi I'm The Fifth Screen"
+        #print dt
+        #print index
+        print 'piss'
+        self.ids.second_screen.ids.second_screen_label.text = items_0[index]
+        self.ids.second_screen.ids.second_screen_label2.text = items_1[index]
+        self.ids.second_screen.ids.second_screen_label3.text = items_2[index]
+        self.ids.second_screen.ids.second_screen_label4.text = items_3[index]
+        self.ids.second_screen.ids.second_screen_label5.text = items_4[index]
+        self.ids.second_screen.ids.second_screen_label6.text = items_5[index]
+
+        self.ids.second_screen.ids.second_screen_label7.text = items_6[index]
+        self.ids.second_screen.ids.second_screen_label8.text = items_7[index]
+        self.ids.second_screen.ids.second_screen_label9.text = items_8[index]
+        self.ids.second_screen.ids.second_screen_label10.text = items_9[index]
+        self.ids.second_screen.ids.second_screen_label11.text = items_10[index]
+        self.ids.second_screen.ids.second_screen_label12.text = items_11[index]
+        self.ids.second_screen.ids.second_screen_label13.text = items_12[index]
+        self.ids.second_screen.ids.second_screen_label14.text = items_13[index]
+        try:
+            print items_13[index],'13'
+        except:
+            print'fail13'
+        try:
+            print items_12[index],'14'
+        except:
+            print 'fail14'
         #Clock.schedule_once(self.screen_switch_three, 2)
 
     def screen_switch_three(self, dt):
@@ -402,6 +464,7 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
     def refresh_view_attrs(self, rv, index, data):
         ''' Catch and handle the view changes '''
         self.index = index
+
         #self.label1_text = str(index)
         #self.label2_text = data['label2']['text']
         self.ids['id_label1'].text = data['label1']['text']  # As an alternate method of assignment
@@ -410,9 +473,10 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         self.ids['id_label4'].text = data['label4']['text']  # As an alternate method of assignment
         self.ids['id_label5'].text = data['label5']['text']  # As an alternate method of assignment
         self.ids['id_label6'].text = data['label6']['text']  # As an alternate method of assignment
-        self.ids['id_label7'].text = data['label7']['text']  # As an alternate method of assignment
+        #self.ids['id_label10'].text = data['label10']['text']  # As an alternate method of assignment
         self.ids['id_label8'].text = data['label8']['text']  # As an alternate method of assignment
         self.ids['id_label9'].text = data['label9']['text']  # As an alternate method of assignment
+        self.ids['id_label11'].text = data['label11']['text']  # As an alternate method of assignment
         return super(SelectableLabel, self).refresh_view_attrs(
             rv, index, data)
 
@@ -428,6 +492,15 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         self.selected = is_selected
         if is_selected:
             print("selection changed to {0}".format(rv.data[index]))
+            ##MyScreenManager.screen_switch_two(ScreenManager)
+            #print dir(MyScreenManager),'msm'
+            #print dir(MyScreenManager.screen_switch_four)
+            #print dir(MyScreenManager.current)
+
+            #rint MyScreenManager.current_screen
+            #MyScreenManager.current='_second_screen_'
+            print dir(App.get_running_app())
+            App.get_running_app().root.screen_switch_two(self,index)
 
             print len(gdate1),'date1'
             print len(gtime1),'gtime1'
@@ -456,7 +529,7 @@ class RV(RecycleView):
         print paired_iter,"HOLYCRAPMAN"
         #
         for i0,i1, i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13 in paired_iter:
-            d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5},'label7': {'text': i6},'label8': {'text': i7},'label9': {'text': i8}}
+            d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5},'label7': {'text': i6},'label8': {'text': i7},'label9': {'text': i8},'label10': {'text': i9},'label11': {'text': i10}}
             #d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5}}
 
             self.data.append(d)
