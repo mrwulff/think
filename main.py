@@ -23,11 +23,29 @@ from bs4 import BeautifulSoup
 
 
 
-items_1 = {'apple',}
-items_2 = {'dog', }
+#items_1 = set()
+#items_2 = set()
+#items_3 = set()
+#items_4 = set()
+items_0=[]
+items_1=[]
+items_2=[]
+items_3=[]
+items_4=[]
+items_5=[]
+items_6=[]
+items_7=[]
+items_8=[]
+items_9=[]
+items_10=[]
+items_11=[]
+items_12=[]
+items_13=[]
+items_14=[]
+
 print type(items_1),"WOWOWOWOWOWOOWOWOW"
-items_1.add('orange')
-items_2.add('fry')
+#items_1.add()
+#items_2.add()
 data={}
 
 gdate1={'',}
@@ -90,20 +108,73 @@ def parse():
     '''
     c = App.get_running_app().storage()
     print((c))
-    a=open(c + 'cache.html', 'r')
-    s=''
-    for line in a.readlines():
-        if 'class="cell-noborder' in line:
-            s=s+line
-            print line
-    s=s.encode('utf-8').decode("ascii")
+    with io.open(c + 'cache.html', 'r',encoding='utf-8') as f:
 
-    parsed_html = BeautifulSoup(s)
+        aaa=f.read()
 
+
+    #print type(aaa)
+    aaa=aaa.replace(u'\u2019',"'")
+    aaa=aaa.replace(u'\xa9','c')
+    aaa=aaa.replace('©','cc')
+    #print aaa
+    #print aaa
     #from pyquery import PyQuery
     #html = aaa
     #pq = PyQuery(html)
+    soup = BeautifulSoup(aaa, 'html.parser')
+    #print(soup.prettify())
+    a= list(soup.children)
+    zz= soup.select('tr')
+    #print zz
+    #print len(zz)
+    onejob=[]
+    print type(onejob)
+    onejob=[]
+    print type(onejob)
+    for g in range(len(zz)):
+        #print g/14,(g%14)-1,zz[g]
+        #print type(zz)
+        a2=(zz[g])
+        #print dir(a2)
+        az3=list(a2.children)
+        #print az3
+        job = []
+        for j in range(len(az3)):
 
+            az4= az3[j]
+            try:
+                #print az4.text
+                job.append(az4.text)
+                #onejob[g]=appendaz4.text
+            except:
+                ''
+                #print az4,'loll'
+            #print dir(az4)
+        print len(job)
+        onejob.append(job)
+    #print onejob
+        #print g
+    for q in range(1,len(onejob[0])-1):
+        #items_1.add( onejob[q][1])
+        #items_2.add(onejob[q][2])
+        #items_3.add(onejob[q][3])
+        #items_4.add(onejob[q][4])
+        items_0.append(onejob[q][0])
+        items_1.append( onejob[q][1])
+        items_2.append(onejob[q][2])
+        items_3.append(onejob[q][3])
+        items_4.append(onejob[q][4])
+        items_5.append(onejob[q][5])
+        items_6.append(onejob[q][6])
+        items_7.append(onejob[q][7])
+        items_8.append(onejob[q][8])
+        items_9.append(onejob[q][9])
+        items_10.append(onejob[q][10])
+        items_11.append(onejob[q][11])
+        items_12.append(onejob[q][12])
+        items_13.append(onejob[q][13])
+        #items_14.append(onejob[q][14])
     '''
         try:
 
@@ -231,15 +302,34 @@ class FirstScreen(Screen):
         res = browser.open(PE_COUNTRIES)
         aa= res.get_data()   # HTML source of the page
 
+
         print (browser,'REAL BROWSER')
 
         #now= (datetime.now())
-        print (aa)
+        print type(aa)
+        print (dir(res))
+        print res.info
+        u=''
+        for i in res.readlines():
+            #print i
+            try:
+                if "allrights" in i or 'copyright -' in i or 'ino Women’s Cold Crew P' in i:
+                    print i,'copy1'
+                    i=''
+
+
+                i=i.encode('utf-8')
+                u=u+(i)
+            except:
+
+                print 'fauil',i
+
+
 
         c = App.get_running_app().storage()
         print((c))
         b = open(str(c) + 'cache.html', 'w')
-        b.write(aa)
+        b.write(u)
         b.close()
 
 
@@ -307,17 +397,22 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
     index = None
     selected = BooleanProperty(False)
     selectable = BooleanProperty(True)
-    cols = 4
+    cols = 9
 
     def refresh_view_attrs(self, rv, index, data):
         ''' Catch and handle the view changes '''
         self.index = index
-        self.label1_text = str(index)
+        #self.label1_text = str(index)
         #self.label2_text = data['label2']['text']
-        #self.ids['id_label1'].text = data['label1']['text']  # As an alternate method of assignment
+        self.ids['id_label1'].text = data['label1']['text']  # As an alternate method of assignment
         self.ids['id_label2'].text = data['label2']['text']  # As an alternate method of assignment
         self.ids['id_label3'].text = data['label3']['text']  # As an alternate method of assignment
         self.ids['id_label4'].text = data['label4']['text']  # As an alternate method of assignment
+        self.ids['id_label5'].text = data['label5']['text']  # As an alternate method of assignment
+        self.ids['id_label6'].text = data['label6']['text']  # As an alternate method of assignment
+        self.ids['id_label7'].text = data['label7']['text']  # As an alternate method of assignment
+        self.ids['id_label8'].text = data['label8']['text']  # As an alternate method of assignment
+        self.ids['id_label9'].text = data['label9']['text']  # As an alternate method of assignment
         return super(SelectableLabel, self).refresh_view_attrs(
             rv, index, data)
 
@@ -350,17 +445,20 @@ class RV(RecycleView):
         print "TESTTESTTESTTEST"
 
         super(RV, self).__init__(**kwargs)
-        #global time1
+        global items_2
+        global items_1
         #global date1
         #global job1
         #global venue1
         #print time1
         print gvenue1
-        paired_iter = zip(gtime1, gdate1,gvenue1)
+        paired_iter = zip(items_0,items_1, items_2,items_3,items_4,items_5,items_6,items_7,items_8,items_9,items_10,items_11,items_12,items_13)
         print paired_iter,"HOLYCRAPMAN"
         #
-        for i1, i2,i3 in paired_iter:
-            d = {'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3}}
+        for i0,i1, i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13 in paired_iter:
+            d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5},'label7': {'text': i6},'label8': {'text': i7},'label9': {'text': i8}}
+            #d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5}}
+
             self.data.append(d)
             print 'wtf man'
         # can also be performed in a complicated one liner for those who like it tricky

@@ -1,3 +1,17 @@
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+# Now you can simply Mix the `BackgroundColor` class with almost
+# any other widget... to give it a background.
+<BLabel@Label+BackgroundColor>
+    background_color: 0, 0, 0, 0
+
+
 <MyScreenManager>:
     FirstScreen:
         id: first_screen
@@ -34,8 +48,8 @@
                     size: self.size
             padding:30
             orientation:"horizontal"
-            Label:
-                background_color: 1, 0, 0, 1
+            BLabel:
+                background_color:0,.2,.2,.8
                 text:"Email:"
                 halign :'justify'
 
@@ -46,7 +60,8 @@
         BoxLayout:
             padding:30
             orientation:"horizontal"
-            Label:
+            BLabel:
+                background_color:0,.2,.2,.4
                 halign :'left'
                 text:"Password:"
             TextInput:
@@ -92,7 +107,9 @@
     BoxLayout:
         orientation:"vertical"
         RV:
+            size_hint:1,.9
         Button:
+            size_hint:.3,.1
             text:'re'
             on_press:
                 #root.__init__(self)
@@ -111,35 +128,120 @@
         Rectangle:
             pos: self.pos
             size: self.size
+    #size:self.texture_size
+    #text_size:root.width,None
     label1_text: 'label 1 text'
     label2_text: 'label 2 text'
 
     label3_text: 'label 3 text'
+
     label4_text: 'label 4 text'
-    pos: self.pos
-    size: self.size
-    Label:
+    label5_text: 'label 5 text'
+    label6_text: 'label 6 text'
+    label7_text: 'label 7 text'
+    label8_text: 'label 8 text'
+    label9_text: 'label 9 text'
+
+    #pos: self.pos
+    #size: self.size
+    BLabel:
+    #DATE
+        #texture_size:.5,.5
+        #text_size:self.size
+        text_sdize:None,None
         id: id_label1
         text: root.label1_text
-    Label:
+        size_hint:.2,None
+        #size:10,10
+        #width:200
+        #height:100
+        background_color:1,.4,0,.8
+        #halign:'left'
+        #valign:'top'
+        font_size:20
+        #padding:0
+        #text_size:100,None
+
+    BLabel:
+    #TIME
+        #size:self.texture_size
+        #text_size:root.width,None
         id: id_label2
         text: root.label2_text
-    Label:
+        size_hint:.15,None
+        background_color:0,.4,0,.8
+        font_size:20
+
+    BLabel:
+    #Type
+        #size:self.texture_size
+        #text_size:root.width,None
+        id: id_label8
+        text: root.label8_text
+        #size_hint:50,50
+        background_color:0,.4,1,.8
+        size_hint:.14,None
+        font_size:20
+
+
+
+    BLabel:
+    #Position
+        #size:self.texture_size
+        #text_size:root.width,None
+        id: id_label9
+        text: root.label9_text
+        size_hint:.2,None
+        background_color:.4,.4,0,.8
+        font_size:20
+    BLabel:
+    #Place
+        #size:self.texture_size
+        #text_size:root.width,None
+        id: id_label5
+        text: root.label5_text
+        #size_hint:50,50
+        background_color:.5,.3,1,.8
+        size_hint:None,1
+
+    BLabel:
+        id: id_label6
+        text: root.label6_text
+        #size_hint:170,170
+        background_color:1,.4,.2,.8
+        size_hint:.6,None
+    BLabel:
+        id: id_label7
+        text: root.label7_text
+        #size_hint:170,170
+        background_color:.5,.4,0,.8
+        size_hint:.5,None
+    BLabel:
         id: id_label3
         text: root.label3_text
-
-    Label:
+        #size_hint:170,170
+        background_color:1,.4,0,.8
+        size_hint:.1,None
+    BLabel:
         id: id_label4
-        text: root.label4_text
+        #text: root.label4_text
+        #size_hint:170,170
+        background_color:1,.8,1,.8
+        size_hint:.2,None
 
 <RV>:
     name: '_fourth_screen3_'
     viewclass: 'SelectableLabel'
     SelectableRecycleBoxLayout:
-        default_size: None, dp(56)
-        default_size_hint: 1, None
-        size_hint_y: None
+        default_size: dp(100), dp(40)
+        default_size_hint: .9,None
+        #size_hint_y: None
+        default_text_size:10
         height: self.minimum_height
         orientation: 'vertical'
         multiselect: True
         touch_multiselect: True
+        size_hint_y: None
+        size_hint_x: 3
+        height: self.minimum_height
+        width: self.minimum_width
