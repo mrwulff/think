@@ -14,10 +14,10 @@
 
 <MyScreenManager>:
     id:manager
-    FourthScreen:
+
     FirstScreen:
         id: first_screen
-
+    FourthScreen:
     SecondScreen:
         id:second_screen
     ThirdScreen:
@@ -85,70 +85,106 @@
                     #root.manager.current = '_fourth_screen_'
 
             Button:
-                text:"Demo"
-                padding:50,50
+                padding:150,150
+                #text:"Demo"
+                #Image:
+
+
+                background_normal:'menu100.png'
+                size_hint:1,1
+                halign:'center'
+                valign:'center'
+                width:50
+                height:50
+
+                    #source:'back.png'
+                    #stretch:'True'
+
                 on_press:
                     #root.loadcache('fuck off',email,password)
                     root.manager.transition.direction = 'down'
                     root.manager.current = '_fourth_screen_'
 
-
+#Flaticon.com
 <SecondScreen>:
     name: '_second_screen_'
+    #canvas.before:
+    #    Rectangle:
+    #        pos: self.pos
+    #        size: self.size
+    #        source: 'icon.png'
     BoxLayout:
         #default_size_hint:.2,.2
         orientation:"vertical"
-
-
-        Label:
+        BLabel:
+        #Show
+            id: second_screen_label4
+            #ize_hint:.13,None
+            background_color:0,.4,0,.8
+            #size_hint:2,.5
+            font_size:60
+            text_size:self.size
+            halign:'center'
+            valign: 'center'
+            padding:5,0
+        BLabel:
+        #Away
+            id: second_screen_label1
+            #size_hint:.33,None
+            background_color:.2,.4,0,.8
+            size_hint:2,.5
+            font_size:40
+            text_size:self.size
+            halign:'left'
+            valign: 'center'
+            padding:5,0
+        BLabel:
+        #Date
             id: second_screen_label
-            size_hint:.13,None
-            background_color:0,.4,0,.8
-            #size_hint:.13,None
+            #size_hint:.33,None
+            background_color:.2,.4,0,.8
+            size_hint:2,.5
             font_size:40
             text_size:self.size
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label
+
+        BLabel:
+        #Time
             id: second_screen_label2
-            #size_hint:.13,None
+            size_hint:2,.5
             background_color:0,.4,0,.8
             font_size:40
             text_size:self.size
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label:
+        BLabel:
+        #jobid
             id: second_screen_label3
             #ize_hint:.13,None
             background_color:0,.4,0,.8
-            #size_hint:.13,None
+            size_hint:2,.5
             font_size:40
             text_size:self.size
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label
-            id: second_screen_label4
-            #size_hint:.13,None
-            background_color:0,.4,0,.8
-            font_size:40
-            text_size:self.size
-            halign:'left'
-            valign: 'center'
-            padding:5,0
-        Label:
+
+        BLabel:
+        #place
             id: second_screen_label5
             #size_hint:.13,None
-            background_color:0,.4,0,.8
+            background_color:1,.4,0,.8
             #size_hint:.13,None
             font_size:40
             text_size:self.size
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label
+        BLabel
+        #venue
             id: second_screen_label6
             #size_hint:.13,None
             background_color:0,.4,0,.8
@@ -158,7 +194,8 @@
             valign: 'center'
             padding:5,0
 
-        Label:
+        BLabel:
+        #client
             id: second_screen_label7
             #size_hint:.13,None
             background_color:0,.4,0,.8
@@ -168,18 +205,21 @@
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label
+        BLabel
+        #type
             id: second_screen_label8
             #size_hint:.13,None
-            background_color:0,.4,0,.8
+            #size_hint:None,1
+            background_color:1,.4,0,.8
             font_size:40
             text_size:self.size
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label:
+        BLabel:
+        #pos
             id: second_screen_label9
-            #size_hint:.13,None
+            #size_hint:None,.5
             background_color:0,.4,0,.8
             #size_hint:.13,None
             font_size:40
@@ -187,28 +227,30 @@
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label
+        BLabel:
             id: second_screen_label10
-            #size_hint:.13,None
-            background_color:0,.4,0,.8
+            #size_hint:None,.5
+            background_color:0,.4,1,.8
             font_size:40
             text_size:self.size
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label:
+        BLabel:
+        #status
             id: second_screen_label11
             #size_hint:.13,None
-            background_color:0,.4,0,.8
-            size_hint:.13,None
+            #background_color:color_1
+            #size_hint:.13,None
             font_size:40
             text_size:self.size
             halign:'left'
             valign: 'center'
             padding:5,0
-        Label
+        BLabel
+        #notes
             id: second_screen_label12
-            size_hint:1,.6
+            size_hint:1,2
             background_color:0,.4,0,.8
             font_size:40
             text_size:self.size
@@ -235,21 +277,53 @@
             valign: 'center'
             padding:5,0
 
+        BoxLayout:
+            size_hint:1,1
+            orientation:"horizontal"
+            Button:
+            #size_hint:.25,.53
+                #text:'back'
 
-        Button:
-            size_hint:.5,.3
-            text:'back'
-            on_press:
+                background_normal:'back.png'
+                #stretch:True
+                on_press:
                 #root.__init__(self)
-                root.manager.transition.direction = 'down'
-                root.manager.current = '_fourth_screen_'
+                    root.manager.transition.direction = 'down'
+                    root.manager.current = '_fourth_screen_'
+            Button:
+                text:'Confirm'
+            Button:
+                padding:150,150
+                #text:"Demo"
+                #Image:
+
+
+                background_normal:'tex.png'
+                size_hint:1,1
+                halign:'center'
+                valign:'center'
+                width:50
+                height:50
+
 
 
 <ThirdScreen>:
     name: '_third_screen_'
-    Label:
-        id: third_screen_label
-        text: "Hi I'm The Third Screen"
+    BoxLayout:
+        orientation:"vertical"
+        #RV2:
+        Button:
+            background_normal:'tex.png'
+            #size_hint:1,1
+            halign:'center'
+            valign:'center'
+            width:50
+            height:50
+            text:'back'
+            on_press:
+
+                root.manager.transition.direction = 'down'
+                root.manager.current = '_fourth_screen_'
 
 <FourthScreen>:
 
@@ -260,7 +334,13 @@
             size_hint:1,.9
         Button:
             size_hint:.3,.1
-            text:'re'
+            background_normal:'back150.png'
+            size_hint:1,1
+            halign:'center'
+            valign:'center'
+            width:50
+            height:50
+            #text:'re'
             on_press:
                 #root.__init__(self)
                 root.manager.transition.direction = 'down'
@@ -431,3 +511,7 @@
         size_hint_x: 3
         height: self.minimum_height
         width: self.minimum_width
+
+
+
+

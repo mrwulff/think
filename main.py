@@ -4,11 +4,23 @@ from __future__ import unicode_literals
 from kivy.app import App
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.uix.recycleview.views import RecycleDataViewBehavior
+
+
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
-from kivy.properties import BooleanProperty
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.popup import Popup
+#from kivy.utils import utils
+from kivy.utils import get_color_from_hex as rgb
+
+from kivy.properties import BooleanProperty, ListProperty, ObjectProperty, NumericProperty, DictProperty
+
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
+
 from kivy.uix.behaviors import FocusBehavior
+from kivy.uix.recyclegridlayout import RecycleGridLayout
+
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.clock import Clock
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -21,7 +33,7 @@ import os
 from bs4 import BeautifulSoup
 
 
-
+index=99
 
 #items_1 = set()
 #items_2 = set()
@@ -42,6 +54,8 @@ items_11=[]
 items_12=[]
 items_13=[]
 items_14=[]
+items_15=[]
+items_16=[]
 
 print type(items_1),"WOWOWOWOWOWOOWOWOW"
 #items_1.add()
@@ -66,7 +80,10 @@ gnotes1={'',}
 
 import unicodedata
 
+onejob=[]
 
+from datetime import datetime
+import humanize
 
 def safeStr(obj):
     try: return str(obj)
@@ -92,6 +109,120 @@ def check( joob, date12, time12, venue12, loc12, show12, type12, status12, pos12
 
     print date12,time12,venue12,'LOCAL HERO'
 import io
+
+
+def check_time(date,time):
+    time=str(time)
+    time2 = (time)
+    date=str(date)
+
+    print (date,time)
+
+    d1, d2, d3 = str.split(date, '/')
+    newd = d1 + '/' + d2
+
+    t1, t2 = str.split(time2, ':')
+    if int(t1) > 12:
+        print('over12 ', t1)
+        t1 = int(t1) - 12
+        time2 = str(t1) + ':' + t2 + ' PM'
+    else:
+        time2 = time2 + ' AM'
+    print time2
+
+    aa = datetime.strptime(date + ' ' + time, '%m/%d/%Y %H:%M')
+    # print (aa)
+
+    now = (datetime.now())
+
+    diff = now-aa
+    print diff
+    global past
+    diffh = humanize.naturaltime(now - aa)
+    past = False
+    neg = (str(diff)[0])
+    if neg == '-':
+        past = True
+
+        diff2 = -diff
+    else:
+        diff2 = diff
+    day = ''
+    hours = ''
+    minutes = ''
+    #print("MMMMM ", diff2)
+
+
+    try:
+        day, hours = str.split(str(diff2), ' days, ')
+        hours=str(hours)
+        if int(day) == 1:
+            day = day + ' day, '
+        else:
+            day = day + ' days, '
+        #print('``````many days')
+
+
+    except:
+        try:
+            #print(diff2, 'GODAMN')
+            hours = str(diff2)
+            #print('`````````````0 days')
+        except:
+            #print('35234523452345234523452345')
+            #print(diff2, '         WHY THE FUCK')
+            day, hours = str.split(str(diff2), ' day, ')
+            #print('``````````1 day')
+    #print("NNNNNN")
+
+    hours, minutes, junk = str.split(hours, ':')
+    #print(hours)
+    #print("OOOOOOOOO")
+    hours=str(hours)
+    if hours == '0':
+
+        #print('ppppppppppp')
+
+        hours = ''
+    else:
+        #print(hours, '    hours')
+        try:
+            day, hours = str.split(hours, ', ')
+            day = day + ', '
+        except:
+            print('dumb')
+        #print hours
+        ##hours = str(int(hours))
+        if int(hours) == 1:
+            hours = hours + ' hour '
+        else:
+            hours = hours + ' hours '
+    #print('asdfadsf')
+    if str(minutes) == 1:
+        minutes = str(int(minutes)) + ' minute'
+    else:
+        minutes = str(int(minutes)) + ' minutes'
+    #print('erererer')
+    
+    
+
+    if past == False:
+        #print('ok')
+        try:
+            a = day + hours + minutes + ' Ago'
+        except:
+            a = 'ERROR'
+        #print('no2')
+    else:
+        #print('no3')
+        try:
+            a = day + hours + minutes + ' Away'
+        except:
+            a = 'ERROR2'
+        #print('no4')
+    #print a
+    return (a, time2)
+
 def parse():
     '''
     date1=''
@@ -118,6 +249,7 @@ def parse():
         pass
 
     if go==True:
+        global onejob
         #print type(aaa)
         aaa=aaa.replace(u'\u2019',"'")
         aaa=aaa.replace(u'\xa9','c')
@@ -147,6 +279,7 @@ def parse():
             job = []
             for j in range(len(az3)):
 
+
                 az4 = az3[j]
                 try:
                     # print az4.text
@@ -161,6 +294,7 @@ def parse():
             onejob.append(job)
         # print onejob
         # print g
+
         if len(onejob)>0:
             for q in range(1,len(onejob[0])-1):
                 #items_1.add( onejob[q][1])
@@ -183,12 +317,13 @@ def parse():
                 items_13.append(onejob[q][13])
                 #items_14.append(onejob[q][14])
         for z in range(len(items_10)):
-            t= items_10[z]
-            print type(t)
-            if t==u'Confirmed':
-                print 'wtf'
-                t='WTF'
-                items_10[z]='✔'
+            t= items_0[z]
+            d=items_1[z]
+            print (t,d,'ratfuck')
+            aa,tim2=check_time(t,d)
+            items_14.append(aa)
+            items_15.append(tim2)
+            print aa
         '''
         try:
 
@@ -244,6 +379,7 @@ def parse():
                 print die
                 #date1, 'SDLFKJ :SDLKFJ:SLDKFJ:SLKFDJ:LSKFD'
     '''
+
 
     #joob = date1 + ' ' + time1 + ' ~ ' + venue1 + ' ~ ' + loc1 + ' ~ ' + show1 + ' ~  ' + client1 + ' ~ ' + type1 + ' ~ ' + pos1 + ' ~ ' + status1 + ' ~ ' + job1 + ' ~ ' + notes1
     #print joob
@@ -395,9 +531,14 @@ sm.add_widget(SecondScreen())
 sm.add_widget(ThirdScreen())
 sm.add_widget(FourthScreen())
 
-
+color_1 = [.2, .2, .2, 1]
+#print type(color_1)
+#print color_1,'wowow'
+color_ = [.1, .1, .1, 1]
+clist=[color_,color_1]
 
 class MyScreenManager(ScreenManager):
+
 
     def __init__(self, **kwargs):
         super(MyScreenManager, self).__init__(**kwargs)
@@ -412,7 +553,9 @@ class MyScreenManager(ScreenManager):
         #print dt
         #print index
         print 'piss'
-        self.ids.second_screen.ids.second_screen_label.text = items_0[index]
+
+        self.ids.second_screen.ids.second_screen_label.text = str(items_0[index])
+        self.ids.second_screen.ids.second_screen_label1.text = items_14[index]
         self.ids.second_screen.ids.second_screen_label2.text = items_1[index]
         self.ids.second_screen.ids.second_screen_label3.text = items_2[index]
         self.ids.second_screen.ids.second_screen_label4.text = items_3[index]
@@ -427,6 +570,59 @@ class MyScreenManager(ScreenManager):
         self.ids.second_screen.ids.second_screen_label12.text = items_11[index]
         self.ids.second_screen.ids.second_screen_label13.text = items_12[index]
         self.ids.second_screen.ids.second_screen_label14.text = items_13[index]
+        print self.ids.second_screen.ids.second_screen_label10.background_color,'gtt'
+
+        #self.ids.second_screen.ids.second_screen_label.font_size=10
+        print
+        i=0
+        j=1
+        scl=[]
+
+        scl.append(self.ids.second_screen.ids.second_screen_label.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label1.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label2.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label3.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label4.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label5.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label6.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label7.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label8.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label9.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label10.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label11.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label12.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label13.background_color )
+        scl.append(self.ids.second_screen.ids.second_screen_label14.background_color )
+        blankc=[0]*len(scl)
+        print blankc,'bc',len(scl)
+        for q in range(len(scl)):
+            if q%2==0:
+            #print scl[q],'red'
+            #scl[q]=color_
+
+                blankc[q]=color_
+            else:
+                blankc[q]=color_1
+            print scl[q], 'blue'
+        print blankc,'blankc'
+        self.ids.second_screen.ids.second_screen_label4.background_color = blankc[0]
+        self.ids.second_screen.ids.second_screen_label1.background_color=blankc[1]
+        self.ids.second_screen.ids.second_screen_label.background_color = blankc[2]
+        self.ids.second_screen.ids.second_screen_label2.background_color = blankc[3]
+        self.ids.second_screen.ids.second_screen_label3.background_color = blankc[4]
+
+
+        self.ids.second_screen.ids.second_screen_label5.background_color = blankc[5]
+        self.ids.second_screen.ids.second_screen_label6.background_color = blankc[6]
+        self.ids.second_screen.ids.second_screen_label7.background_color = blankc[7]
+        self.ids.second_screen.ids.second_screen_label8.background_color = blankc[8]
+        self.ids.second_screen.ids.second_screen_label9.background_color = blankc[9]
+        self.ids.second_screen.ids.second_screen_label10.background_color = blankc[10]
+        self.ids.second_screen.ids.second_screen_label11.background_color = blankc[11]
+        self.ids.second_screen.ids.second_screen_label12.background_color = blankc[12]
+        self.ids.second_screen.ids.second_screen_label13.background_color = blankc[13]
+        self.ids.second_screen.ids.second_screen_label14.background_color = blankc[14]
+
         try:
             print items_13[index],'13'
         except:
@@ -437,13 +633,18 @@ class MyScreenManager(ScreenManager):
             print 'fail14'
         #Clock.schedule_once(self.screen_switch_three, 2)
 
-    def screen_switch_three(self, dt):
+    def screen_switch_three(self, dt,index):
         self.current = '_third_screen_'
         #Clock.schedule_once(self.screen_switch_four, 2)
 
     def screen_switch_four(self, dt):
         self.current = '_fourth_screen_'
         #Clock.schedule_once(self.screen_switch_one, 2)
+
+
+
+
+
 
 
 
@@ -456,12 +657,14 @@ class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
 
 class SelectableLabel(RecycleDataViewBehavior, GridLayout):
     ''' Add selection support to the Label '''
+    #global index
     index = None
     selected = BooleanProperty(False)
     selectable = BooleanProperty(True)
     cols = 9
 
     def refresh_view_attrs(self, rv, index, data):
+        #global index
         ''' Catch and handle the view changes '''
         self.index = index
 
@@ -536,6 +739,13 @@ class RV(RecycleView):
             print 'wtf man'
         # can also be performed in a complicated one liner for those who like it tricky
         # self.data = [{'label2': {'text': i1}, 'label3': {'text': i2}} for i1, i2 in zip(items_1, items_2)]
+
+
+
+items2_1 = {'apple', 'banana', 'pear', 'pineapple'}
+items2_2 = {'dog', 'cat', 'rat', 'bat'}
+
+
 
 
 
