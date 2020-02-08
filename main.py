@@ -30,7 +30,7 @@ import mechanize
 from functools import wraps
 import os
 from bs4 import BeautifulSoup
-
+from time import *
 index = 99
 
 # items_1 = set()
@@ -315,6 +315,7 @@ def parse():
         pass
 
     if go == True:
+        items_14=[]
         global onejob
         # print type(aaa)
         aaa = aaa.replace(u'\u2019', "'")
@@ -452,6 +453,7 @@ def parse():
     # print joob
 
     # check(joob, date1, time1, venue1, loc1, show1, type1, status1, pos1, notes1, client1, job1)
+    return items_14,items_15
 
 
 class FirstScreen(Screen):
@@ -608,10 +610,10 @@ sm.add_widget(SecondScreen())
 sm.add_widget(ThirdScreen())
 sm.add_widget(FourthScreen())
 
-color_1 = [.2, .2, .2, 1]
+color_ = [.2, .2, .2, 1]
 # print type(color_1)
 # print color_1,'wowow'
-color_ = [.1, .1, .1, 1]
+color_1 = [.1, .1, .1, 1]
 clist = [color_, color_1]
 
 
@@ -619,7 +621,7 @@ class MyScreenManager(ScreenManager):
 
     def __init__(self, **kwargs):
         super(MyScreenManager, self).__init__(**kwargs)
-        Clock.schedule_once(self.screen_switch_one, 0)
+        Clock.schedule_once(self.screen_switch_three, 0)
 
     def screen_switch_one(self, dt):
         self.current = '_first_screen_'
@@ -646,8 +648,9 @@ class MyScreenManager(ScreenManager):
         self.current = '_second_screen_'
         # print dt
         # print index
-        print
-        'piss'
+        print 'piss'
+        items_14,items_15=parse()
+        print items_14
 
         self.ids.second_screen.ids.second_screen_label.text = str(items_0[index])
         self.ids.second_screen.ids.second_screen_label1.text = items_14[index]
@@ -735,7 +738,7 @@ class MyScreenManager(ScreenManager):
             'fail14'
         # Clock.schedule_once(self.screen_switch_three, 2)
 
-    def screen_switch_three(self, dt, index):
+    def screen_switch_three(self, dt):
         self.current = '_third_screen_'
         # Clock.schedule_once(self.screen_switch_four, 2)
 
@@ -764,6 +767,11 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
 
         # self.label1_text = str(index)
         # self.label2_text = data['label2']['text']
+        if index%2==0:
+            blank=color_
+        else:
+            blank=color_1
+
         self.ids['id_label1'].text = data['label1']['text']  # As an alternate method of assignment
         self.ids['id_label2'].text = data['label2']['text']  # As an alternate method of assignment
         self.ids['id_label3'].text = data['label3']['text']  # As an alternate method of assignment
@@ -774,6 +782,69 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         self.ids['id_label8'].text = data['label8']['text']  # As an alternate method of assignment
         self.ids['id_label9'].text = data['label9']['text']  # As an alternate method of assignment
         self.ids['id_label11'].text = data['label11']['text']  # As an alternate method of assignment
+        blank2=(1,1,1,1)
+        b=str((self.ids['id_label1'].text))
+        day = datetime.strptime(b, "%m/%d/%Y")
+        print type(day),'day'
+
+        today=strftime("%Y-%m-%d",gmtime())
+        today=datetime.strptime(today,"%Y-%m-%d")
+        print type(today),'today'
+        print day,today
+
+        try:
+            ab10 = str((self.ids['id_label11'].text))
+            ab10 = ab10.lower()
+        except:
+            ab10=''
+        ab= str((self.ids['id_label4'].text))
+        #print ab
+        ab= ab.lower()
+
+        print ab10
+
+
+        if day>today:
+            pass
+            #print 'greater'
+            #blank2=[.5,.5,.5,1]
+        if today>day:
+            print 'less'
+            blank2=[.5,.5,.6,1]
+        if today==day:
+            print'TODAY'
+            blank2 = [.59, .59, .99, 1]
+        if 'cancelled' in ab or 'canceled' in ab or 'cancelled' in ab10 or 'canceled' in ab10:
+
+            blank2 = (1, 0, 0, 1)
+        if 'called' in ab10 or 'tentative' in ab10:
+            blank2 = (0, 1, 0, 1)
+
+
+        self.ids['id_label1'].color=blank2
+        self.ids['id_label2'].color = blank2
+        self.ids['id_label3'].color = blank2
+        self.ids['id_label4'].color = blank2
+        self.ids['id_label5'].color = blank2
+        self.ids['id_label6'].color = blank2
+        self.ids['id_label8'].color = blank2
+        self.ids['id_label9'].color = blank2
+        self.ids['id_label11'].color = blank2
+
+
+        self.ids['id_label1'].background_color=blank
+        self.ids['id_label2'].background_color = blank
+        self.ids['id_label3'].background_color = blank
+        self.ids['id_label4'].background_color=blank
+        self.ids['id_label5'].background_color = blank
+        self.ids['id_label6'].background_color = blank
+        #self.ids['id_label7'].background_color=blank
+        self.ids['id_label8'].background_color = blank
+        self.ids['id_label9'].background_color = blank
+        #self.ids['id_label10'].background_color=blank
+        self.ids['id_label11'].background_color = blank
+
+
         return super(SelectableLabel, self).refresh_view_attrs(
             rv, index, data)
 
@@ -788,7 +859,7 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         ''' Respond to the selection of items in the view. '''
         self.selected = is_selected
         if is_selected:
-            print("selection changed to {0}".format(rv.data[index]))
+            #print("selection changed to {0}".format(rv.data[index]))
             ##MyScreenManager.screen_switch_two(ScreenManager)
             # print dir(MyScreenManager),'msm'
             # print dir(MyScreenManager.screen_switch_four)
@@ -811,6 +882,7 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
             print
             len(rv.data), 'data'
         else:
+            pass
             print("selection removed for {0}".format(rv.data[index]))
 
 
