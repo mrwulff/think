@@ -6,12 +6,11 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 
-
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
-#from kivy.utils import utils
+# from kivy.utils import utils
 from kivy.utils import get_color_from_hex as rgb
 
 from kivy.properties import BooleanProperty, ListProperty, ObjectProperty, NumericProperty, DictProperty
@@ -32,68 +31,70 @@ from functools import wraps
 import os
 from bs4 import BeautifulSoup
 
+index = 99
 
-index=99
+# items_1 = set()
+# items_2 = set()
+# items_3 = set()
+# items_4 = set()
+items_0 = []
+items_1 = []
+items_2 = []
+items_3 = []
+items_4 = []
+items_5 = []
+items_6 = []
+items_7 = []
+items_8 = []
+items_9 = []
+items_10 = []
+items_11 = []
+items_12 = []
+items_13 = []
+items_14 = []
+items_15 = []
+items_16 = []
 
-#items_1 = set()
-#items_2 = set()
-#items_3 = set()
-#items_4 = set()
-items_0=[]
-items_1=[]
-items_2=[]
-items_3=[]
-items_4=[]
-items_5=[]
-items_6=[]
-items_7=[]
-items_8=[]
-items_9=[]
-items_10=[]
-items_11=[]
-items_12=[]
-items_13=[]
-items_14=[]
-items_15=[]
-items_16=[]
+print
+type(items_1), "WOWOWOWOWOWOOWOWOW"
+# items_1.add()
+# items_2.add()
+data = {}
 
-print type(items_1),"WOWOWOWOWOWOOWOWOW"
-#items_1.add()
-#items_2.add()
-data={}
+gdate1 = {'', }
+gtime1 = {'', }
+gjob1 = {'', }
+gshow1 = {'', }
+gvenue1 = {'', }
+gloc1 = {'', }
+gclient1 = {'', }
+gtype1 = {'', }
+gpos1 = {'', }
+gstatus1 = {'', }
+gnotes1 = {'', }
 
-gdate1={'',}
-gtime1={'',}
-gjob1={'',}
-gshow1={'',}
-gvenue1={'',}
-gloc1={'',}
-gclient1={'',}
-gtype1={'',}
-gpos1={'',}
-gstatus1={'',}
-gnotes1={'',}
-
-#import sys
-#reload(sys)
-#sys.setdefaultencoding('utf8')
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf8')
 
 import unicodedata
 
-onejob=[]
+onejob = []
 
 from datetime import datetime
 import humanize
 
+
 def safeStr(obj):
-    try: return str(obj)
+    try:
+        return str(obj)
     except UnicodeEncodeError:
         return obj.encode('ascii', 'ignore').decode('ascii')
-    except: return ""
+    except:
+        return ""
 
 
-
-def check( joob, date12, time12, venue12, loc12, show12, type12, status12, pos12, notes12, client12, job12):
+def check(joob, date12, time12, venue12, loc12, show12, type12, status12, pos12, notes12, client12, job12):
     global gdate1
     gdate1.add(date12)
 
@@ -106,17 +107,19 @@ def check( joob, date12, time12, venue12, loc12, show12, type12, status12, pos12
     global gloc1
     gloc1.add(loc12)
 
+    print
+    date12, time12, venue12, 'LOCAL HERO'
 
-    print date12,time12,venue12,'LOCAL HERO'
+
 import io
 
 
-def check_time(date,time):
-    time=str(time)
+def check_time(date, time):
+    time = str(time)
     time2 = (time)
-    date=str(date)
+    date = str(date)
 
-    print (date,time)
+    print(date, time)
 
     d1, d2, d3 = str.split(date, '/')
     newd = d1 + '/' + d2
@@ -128,15 +131,17 @@ def check_time(date,time):
         time2 = str(t1) + ':' + t2 + ' PM'
     else:
         time2 = time2 + ' AM'
-    print time2
+    print
+    time2
 
     aa = datetime.strptime(date + ' ' + time, '%m/%d/%Y %H:%M')
     # print (aa)
 
     now = (datetime.now())
 
-    diff = now-aa
-    print diff
+    diff = now - aa
+    print
+    diff
     global past
     diffh = humanize.naturaltime(now - aa)
     past = False
@@ -150,79 +155,140 @@ def check_time(date,time):
     day = ''
     hours = ''
     minutes = ''
-    #print("MMMMM ", diff2)
-
+    # print("MMMMM ", diff2)
 
     try:
         day, hours = str.split(str(diff2), ' days, ')
-        hours=str(hours)
+        hours = str(hours)
         if int(day) == 1:
             day = day + ' day, '
         else:
             day = day + ' days, '
-        #print('``````many days')
+        # print('``````many days')
 
 
     except:
         try:
-            #print(diff2, 'GODAMN')
+            # print(diff2, 'GODAMN')
             hours = str(diff2)
-            #print('`````````````0 days')
+            # print('`````````````0 days')
         except:
-            #print('35234523452345234523452345')
-            #print(diff2, '         WHY THE FUCK')
+            # print('35234523452345234523452345')
+            # print(diff2, '         WHY THE FUCK')
             day, hours = str.split(str(diff2), ' day, ')
-            #print('``````````1 day')
-    #print("NNNNNN")
+            # print('``````````1 day')
+    # print("NNNNNN")
 
     hours, minutes, junk = str.split(hours, ':')
-    #print(hours)
-    #print("OOOOOOOOO")
-    hours=str(hours)
+    # print(hours)
+    # print("OOOOOOOOO")
+    hours = str(hours)
     if hours == '0':
 
-        #print('ppppppppppp')
+        # print('ppppppppppp')
 
         hours = ''
     else:
-        #print(hours, '    hours')
+        # print(hours, '    hours')
         try:
             day, hours = str.split(hours, ', ')
             day = day + ', '
         except:
             print('dumb')
-        #print hours
+        # print hours
         ##hours = str(int(hours))
         if int(hours) == 1:
             hours = hours + ' hour '
         else:
             hours = hours + ' hours '
-    #print('asdfadsf')
+    # print('asdfadsf')
     if str(minutes) == 1:
         minutes = str(int(minutes)) + ' minute'
     else:
         minutes = str(int(minutes)) + ' minutes'
-    #print('erererer')
-    
-    
+    # print('erererer')
 
     if past == False:
-        #print('ok')
+        # print('ok')
         try:
             a = day + hours + minutes + ' Ago'
         except:
             a = 'ERROR'
-        #print('no2')
+        # print('no2')
     else:
-        #print('no3')
+        # print('no3')
         try:
             a = day + hours + minutes + ' Away'
         except:
             a = 'ERROR2'
-        #print('no4')
-    #print a
+        # print('no4')
+    # print a
     return (a, time2)
+from datetime import *
+import time
+import humanize
+from time import mktime
+def updated(self,filename):
+    if True:
+        if filename=='':
+            c = App.get_running_app().storage()
+            filename=(c + 'cache.html')
 
+        stat=os.stat(filename)
+        f= stat.st_mtime
+        fc= time.gmtime(f)
+        now= time.gmtime()
+        fc = datetime.fromtimestamp(mktime(fc))
+        now = datetime.fromtimestamp(mktime(now))
+        difh=humanize.naturaldelta(now-fc)
+        print difh
+    #MyScreenManager.ids.first_screen.ids.status.text = str('Updated ' + difh + ' ago.')
+    #print dir(self.ids.status)
+        return difh
+    #except:
+     #   return ''
+def parse_name():
+
+    c = App.get_running_app().storage()
+    print((c))
+    go=True
+    try:
+        with io.open(c + 'cache.html', 'r',encoding='utf-8') as f:
+
+            aaa=f.readlines()
+            aaa2=f.read()
+            print('ASSHOLE')
+    except:
+        print 'WTF YOU ASS'
+        go=False
+        pass
+    f=''
+    l=''
+
+    if go==True:
+        #print aaa
+        for line in aaa:
+            print line
+            if 'lblEmp' in line:
+                print line
+                line=unicode.split(line,'>')
+                line=unicode.split(line[1],'<')
+                #print line[0]
+                l,f=unicode.split(line[0],', ')
+                #print f,l
+        with io.open(c + 'cache.html', 'r', encoding='utf-8') as f2:
+            aaa2 = f2.read()
+        #print aaa2
+        soup = BeautifulSoup(aaa2, 'html.parser')
+        #print(soup.prettify())
+        ##print(soup.prettify())
+        a= list(soup.children)
+        zz= soup.select('tr')
+        #print str(len (zz))
+    if len(f)>0:
+        return f,l,str(len (zz))
+    else:
+        return 'No cache found',''
 def parse():
     '''
     date1=''
@@ -239,36 +305,38 @@ def parse():
     '''
     c = App.get_running_app().storage()
     print((c))
-    go=True
+    go = True
     try:
-        with io.open(c + 'cache.html', 'r',encoding='utf-8') as f:
+        with io.open(c + 'cache.html', 'r', encoding='utf-8') as f:
 
-            aaa=f.read()
+            aaa = f.read()
     except:
-        go=False
+        go = False
         pass
 
-    if go==True:
+    if go == True:
         global onejob
-        #print type(aaa)
-        aaa=aaa.replace(u'\u2019',"'")
-        aaa=aaa.replace(u'\xa9','c')
-        aaa=aaa.replace('©','cc')
-        #print aaa
-        #print aaa
-        #from pyquery import PyQuery
-        #html = aaa
-        #pq = PyQuery(html)
+        # print type(aaa)
+        aaa = aaa.replace(u'\u2019', "'")
+        aaa = aaa.replace(u'\xa9', 'c')
+        aaa = aaa.replace('©', 'cc')
+        # print aaa
+        # print aaa
+        # from pyquery import PyQuery
+        # html = aaa
+        # pq = PyQuery(html)
         soup = BeautifulSoup(aaa, 'html.parser')
-        #print(soup.prettify())
-        a= list(soup.children)
-        zz= soup.select('tr')
-        #print zz
-        #print len(zz)
-        onejob=[]
-        print type(onejob)
-        onejob=[]
-        print type(onejob)
+        # print(soup.prettify())
+        a = list(soup.children)
+        zz = soup.select('tr')
+        # print zz
+        # print len(zz)
+        onejob = []
+        print
+        type(onejob)
+        onejob = []
+        print
+        type(onejob)
         for g in range(len(zz)):
             # print g/14,(g%14)-1,zz[g]
             # print type(zz)
@@ -278,7 +346,6 @@ def parse():
             # print az3
             job = []
             for j in range(len(az3)):
-
 
                 az4 = az3[j]
                 try:
@@ -295,14 +362,14 @@ def parse():
         # print onejob
         # print g
 
-        if len(onejob)>0:
-            for q in range(1,len(onejob[0])-1):
-                #items_1.add( onejob[q][1])
-                #items_2.add(onejob[q][2])
-                #items_3.add(onejob[q][3])
-                #items_4.add(onejob[q][4])
+        if len(onejob) > 0:
+            for q in range(1, len(onejob[0]) - 1):
+                # items_1.add( onejob[q][1])
+                # items_2.add(onejob[q][2])
+                # items_3.add(onejob[q][3])
+                # items_4.add(onejob[q][4])
                 items_0.append(onejob[q][0])
-                items_1.append( onejob[q][1])
+                items_1.append(onejob[q][1])
                 items_2.append(onejob[q][2])
                 items_3.append(onejob[q][3])
                 items_4.append(onejob[q][4])
@@ -315,15 +382,16 @@ def parse():
                 items_11.append(onejob[q][11])
                 items_12.append(onejob[q][12])
                 items_13.append(onejob[q][13])
-                #items_14.append(onejob[q][14])
+                # items_14.append(onejob[q][14])
         for z in range(len(items_10)):
-            t= items_0[z]
-            d=items_1[z]
-            print (t,d,'ratfuck')
-            aa,tim2=check_time(t,d)
+            t = items_0[z]
+            d = items_1[z]
+            print(t, d, 'ratfuck')
+            aa, tim2 = check_time(t, d)
             items_14.append(aa)
             items_15.append(tim2)
-            print aa
+            print
+            aa
         '''
         try:
 
@@ -380,101 +448,104 @@ def parse():
                 #date1, 'SDLFKJ :SDLKFJ:SLDKFJ:SLKFDJ:LSKFD'
     '''
 
+    # joob = date1 + ' ' + time1 + ' ~ ' + venue1 + ' ~ ' + loc1 + ' ~ ' + show1 + ' ~  ' + client1 + ' ~ ' + type1 + ' ~ ' + pos1 + ' ~ ' + status1 + ' ~ ' + job1 + ' ~ ' + notes1
+    # print joob
 
-    #joob = date1 + ' ' + time1 + ' ~ ' + venue1 + ' ~ ' + loc1 + ' ~ ' + show1 + ' ~  ' + client1 + ' ~ ' + type1 + ' ~ ' + pos1 + ' ~ ' + status1 + ' ~ ' + job1 + ' ~ ' + notes1
-    #print joob
-
-    #check(joob, date1, time1, venue1, loc1, show1, type1, status1, pos1, notes1, client1, job1)
+    # check(joob, date1, time1, venue1, loc1, show1, type1, status1, pos1, notes1, client1, job1)
 
 
 class FirstScreen(Screen):
-    def sslwrap(self,func):
+    def sslwrap(self, func):
         @wraps(func)
         def bar(*args, **kw):
             kw['ssl_version'] = ssl.PROTOCOL_TLSv1
             return func(*args, **kw)
 
         return bar
-    def login(self,b,c,d):
-        print 'calculate'
-        #import  urllib3
+
+    def login(self, b, c, d):
+        print
+        'calculate'
+        # import  urllib3
         ssl.wrap_socket = self.sslwrap(ssl.wrap_socket)
 
-        #requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = ('DES-CBC3-SHA')
+        # requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = ('DES-CBC3-SHA')
 
-        #print (urllib3.util.ssl_.DEFAULT_CIPHERS),'urldc'
+        # print (urllib3.util.ssl_.DEFAULT_CIPHERS),'urldc'
 
         global now
-        #ssl._DEFAULT_CIPHERS = ('DES-CBC3-SHA')
-        ssl.verify=False
-        #print ssl._DEFAULT_CIPHERS,'dc'
+        # ssl._DEFAULT_CIPHERS = ('DES-CBC3-SHA')
+        ssl.verify = False
+        # print ssl._DEFAULT_CIPHERS,'dc'
         global browser
-        print(ssl.OPENSSL_VERSION_INFO),'test'
-        #ssl._create_default_https_context
+        print(ssl.OPENSSL_VERSION_INFO), 'test'
+        # ssl._create_default_https_context
         print
         print
         print
-        print (ssl.SSLSocket.cipher)
-        #print dir(ssl_.wrap_socket)
-        #print poo
+        print(ssl.SSLSocket.cipher)
+        # print dir(ssl_.wrap_socket)
+        # print poo
 
-        #PE_LOGIN = 'http://www.thinkrhino.com/employee/lasvegas/'
+        # PE_LOGIN = 'http://www.thinkrhino.com/employee/lasvegas/'
         PE_LOGIN = 'https://www.thinkrhino.com/employee/lasvegas/index.aspx'
         PE_COUNTRIES = 'https://www.thinkrhino.com/employee/lasvegas/Schedule.aspx'
-        #PE_LOGIN='http://google.com'
-        #PE_COUNTRIES='https://yahoo.com'
+        # PE_LOGIN='http://google.com'
+        # PE_COUNTRIES='https://yahoo.com'
         import operator
-        print c.text
+        print
+        c.text
 
         USERNAME = c.text
         PASSWORD = d.text
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        #aaa=open(dir_path+'/test2.html','wb')
+        # aaa=open(dir_path+'/test2.html','wb')
         browser = mechanize.Browser()
-        #print dir(browser)
+        # print dir(browser)
         pass
         browser.set_handle_robots(False)
         browser.set_handle_equiv(False)
-        browser.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+        browser.addheaders = [('User-agent',
+                               'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
         browser.open(PE_LOGIN)
 
         browser.select_form(name="ctl00")
         browser['emailaddress'] = USERNAME
         browser['mypassword'] = PASSWORD
-        #print (browser)
-        #print browser.title
+        # print (browser)
+        # print browser.title
 
         res = browser.submit()
-        #print dir(res)
-        #print res.header_items
-        #print res.get_data()
+        # print dir(res)
+        # print res.header_items
+        # print res.get_data()
 
         res = browser.open(PE_COUNTRIES)
-        aa= res.get_data()   # HTML source of the page
+        aa = res.get_data()  # HTML source of the page
 
+        print(browser, 'REAL BROWSER')
 
-        print (browser,'REAL BROWSER')
-
-        #now= (datetime.now())
-        print type(aa)
-        print (dir(res))
-        print res.info
-        u=''
+        # now= (datetime.now())
+        print
+        type(aa)
+        print(dir(res))
+        print
+        res.info
+        u = ''
         for i in res.readlines():
-            #print i
+            # print i
             try:
                 if "allrights" in i or 'copyright -' in i or 'ino Women’s Cold Crew P' in i:
-                    print i,'copy1'
-                    i=''
+                    print
+                    i, 'copy1'
+                    i = ''
 
-
-                i=i.encode('utf-8')
-                u=u+(i)
+                i = i.encode('utf-8')
+                u = u + (i)
             except:
 
-                print 'fauil',i
-
-
+                print
+                'fauil', i
 
         c = App.get_running_app().storage()
         print((c))
@@ -482,48 +553,54 @@ class FirstScreen(Screen):
         b.write(u)
         b.close()
 
+    def loadcache(self, a, b, c):
+        parse()
+        #print date1
+        # a, b
 
-
-
-
-
-
-    def loadcache(self,a, b,c):
-        self.parse()
-        print date1
-        #a, b
     pass
 
+
 class SecondScreen(Screen):
-    #def __init__(self):
+    # def __init__(self):
     #    print 'jesus'
     def wow(self):
-        #print a
-        #print'omg'
-        print self
-        #print dir(self)
-        print self.manager
+        # print a
+        # print'omg'
+        print
+        self
+        # print dir(self)
+        print
+        self.manager
         print(dir(self.manager))
-        print dir(self.manager.screen_names)
-        #self.lbl1.text = 'wo2w'
+        print
+        dir(self.manager.screen_names)
+        # self.lbl1.text = 'wo2w'
         self.random_number = items_1[3]
         pass
 
-    print dir(App.get_running_app()),'trtr'
+    print
+    dir(App.get_running_app()), 'trtr'
 
     app = App.get_running_app()
-    print app,'808'
-    print (dir(app)),'9009'
-    #item_1=['w']*4
-    #random_number = item_1[3]
+    print
+    app, '808'
+    print(dir(app)), '9009'
+    # item_1=['w']*4
+    # random_number = item_1[3]
 
-    print 'fuck'
+    print
+    'fuck'
     pass
+
+
 class ThirdScreen(Screen):
     pass
 
+
 class FourthScreen(Screen):
     pass
+
 
 sm = ScreenManager()
 sm.add_widget(FirstScreen())
@@ -532,27 +609,45 @@ sm.add_widget(ThirdScreen())
 sm.add_widget(FourthScreen())
 
 color_1 = [.2, .2, .2, 1]
-#print type(color_1)
-#print color_1,'wowow'
+# print type(color_1)
+# print color_1,'wowow'
 color_ = [.1, .1, .1, 1]
-clist=[color_,color_1]
+clist = [color_, color_1]
+
 
 class MyScreenManager(ScreenManager):
 
-
     def __init__(self, **kwargs):
         super(MyScreenManager, self).__init__(**kwargs)
-        Clock.schedule_once(self.screen_switch_one, 2)
+        Clock.schedule_once(self.screen_switch_one, 0)
 
     def screen_switch_one(self, dt):
         self.current = '_first_screen_'
-        #Clock.schedule_once(self.screen_switch_two, 2)
+        print 'loading first screen'
+        a = updated(self, '')
+        try:
+            f, l, j = parse_name()
+            print a,f,l,j,'parsename'
+        except:
+            f, l, j = parse_name()
+            f = ''
+        if len(f) > 0:
+            self.ids.first_screen.ids.status.text = str(f + ' ' + l + ':' + j + ' jobs\nUpdated ' + a + ' ago.\n')
+        # Clock.schedule_once(self.screen_switch_two, 2)
+        root = App.get_running_app().root
+        print
+        root.ids.viewkeys
+        print
+        dir(root.ids.viewkeys)
+        print
+        'why'
 
-    def screen_switch_two(self, dt,index):
+    def screen_switch_two(self, dt, index):
         self.current = '_second_screen_'
-        #print dt
-        #print index
-        print 'piss'
+        # print dt
+        # print index
+        print
+        'piss'
 
         self.ids.second_screen.ids.second_screen_label.text = str(items_0[index])
         self.ids.second_screen.ids.second_screen_label1.text = items_14[index]
@@ -570,47 +665,50 @@ class MyScreenManager(ScreenManager):
         self.ids.second_screen.ids.second_screen_label12.text = items_11[index]
         self.ids.second_screen.ids.second_screen_label13.text = items_12[index]
         self.ids.second_screen.ids.second_screen_label14.text = items_13[index]
-        print self.ids.second_screen.ids.second_screen_label10.background_color,'gtt'
-
-        #self.ids.second_screen.ids.second_screen_label.font_size=10
         print
-        i=0
-        j=1
-        scl=[]
+        self.ids.second_screen.ids.second_screen_label10.background_color, 'gtt'
+
+        # self.ids.second_screen.ids.second_screen_label.font_size=10
+        print
+        i = 0
+        j = 1
+        scl = []
 
         scl.append(self.ids.second_screen.ids.second_screen_label.background_color)
         scl.append(self.ids.second_screen.ids.second_screen_label1.background_color)
         scl.append(self.ids.second_screen.ids.second_screen_label2.background_color)
         scl.append(self.ids.second_screen.ids.second_screen_label3.background_color)
         scl.append(self.ids.second_screen.ids.second_screen_label4.background_color)
-        scl.append(self.ids.second_screen.ids.second_screen_label5.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label6.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label7.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label8.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label9.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label10.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label11.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label12.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label13.background_color )
-        scl.append(self.ids.second_screen.ids.second_screen_label14.background_color )
-        blankc=[0]*len(scl)
-        print blankc,'bc',len(scl)
+        scl.append(self.ids.second_screen.ids.second_screen_label5.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label6.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label7.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label8.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label9.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label10.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label11.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label12.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label13.background_color)
+        scl.append(self.ids.second_screen.ids.second_screen_label14.background_color)
+        blankc = [0] * len(scl)
+        print
+        blankc, 'bc', len(scl)
         for q in range(len(scl)):
-            if q%2==0:
-            #print scl[q],'red'
-            #scl[q]=color_
+            if q % 2 == 0:
+                # print scl[q],'red'
+                # scl[q]=color_
 
-                blankc[q]=color_
+                blankc[q] = color_
             else:
-                blankc[q]=color_1
-            print scl[q], 'blue'
-        print blankc,'blankc'
+                blankc[q] = color_1
+            print
+            scl[q], 'blue'
+        print
+        blankc, 'blankc'
         self.ids.second_screen.ids.second_screen_label4.background_color = blankc[0]
-        self.ids.second_screen.ids.second_screen_label1.background_color=blankc[1]
+        self.ids.second_screen.ids.second_screen_label1.background_color = blankc[1]
         self.ids.second_screen.ids.second_screen_label.background_color = blankc[2]
         self.ids.second_screen.ids.second_screen_label2.background_color = blankc[3]
         self.ids.second_screen.ids.second_screen_label3.background_color = blankc[4]
-
 
         self.ids.second_screen.ids.second_screen_label5.background_color = blankc[5]
         self.ids.second_screen.ids.second_screen_label6.background_color = blankc[6]
@@ -624,30 +722,26 @@ class MyScreenManager(ScreenManager):
         self.ids.second_screen.ids.second_screen_label14.background_color = blankc[14]
 
         try:
-            print items_13[index],'13'
+            print
+            items_13[index], '13'
         except:
-            print'fail13'
+            print
+            'fail13'
         try:
-            print items_12[index],'14'
+            print
+            items_12[index], '14'
         except:
-            print 'fail14'
-        #Clock.schedule_once(self.screen_switch_three, 2)
+            print
+            'fail14'
+        # Clock.schedule_once(self.screen_switch_three, 2)
 
-    def screen_switch_three(self, dt,index):
+    def screen_switch_three(self, dt, index):
         self.current = '_third_screen_'
-        #Clock.schedule_once(self.screen_switch_four, 2)
+        # Clock.schedule_once(self.screen_switch_four, 2)
 
     def screen_switch_four(self, dt):
         self.current = '_fourth_screen_'
-        #Clock.schedule_once(self.screen_switch_one, 2)
-
-
-
-
-
-
-
-
+        # Clock.schedule_once(self.screen_switch_one, 2)
 
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
@@ -657,26 +751,26 @@ class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
 
 class SelectableLabel(RecycleDataViewBehavior, GridLayout):
     ''' Add selection support to the Label '''
-    #global index
+    # global index
     index = None
     selected = BooleanProperty(False)
     selectable = BooleanProperty(True)
     cols = 9
 
     def refresh_view_attrs(self, rv, index, data):
-        #global index
+        # global index
         ''' Catch and handle the view changes '''
         self.index = index
 
-        #self.label1_text = str(index)
-        #self.label2_text = data['label2']['text']
+        # self.label1_text = str(index)
+        # self.label2_text = data['label2']['text']
         self.ids['id_label1'].text = data['label1']['text']  # As an alternate method of assignment
         self.ids['id_label2'].text = data['label2']['text']  # As an alternate method of assignment
         self.ids['id_label3'].text = data['label3']['text']  # As an alternate method of assignment
         self.ids['id_label4'].text = data['label4']['text']  # As an alternate method of assignment
         self.ids['id_label5'].text = data['label5']['text']  # As an alternate method of assignment
         self.ids['id_label6'].text = data['label6']['text']  # As an alternate method of assignment
-        #self.ids['id_label10'].text = data['label10']['text']  # As an alternate method of assignment
+        # self.ids['id_label10'].text = data['label10']['text']  # As an alternate method of assignment
         self.ids['id_label8'].text = data['label8']['text']  # As an alternate method of assignment
         self.ids['id_label9'].text = data['label9']['text']  # As an alternate method of assignment
         self.ids['id_label11'].text = data['label11']['text']  # As an alternate method of assignment
@@ -696,20 +790,26 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         if is_selected:
             print("selection changed to {0}".format(rv.data[index]))
             ##MyScreenManager.screen_switch_two(ScreenManager)
-            #print dir(MyScreenManager),'msm'
-            #print dir(MyScreenManager.screen_switch_four)
-            #print dir(MyScreenManager.current)
+            # print dir(MyScreenManager),'msm'
+            # print dir(MyScreenManager.screen_switch_four)
+            # print dir(MyScreenManager.current)
 
-            #rint MyScreenManager.current_screen
-            #MyScreenManager.current='_second_screen_'
-            print dir(App.get_running_app())
-            App.get_running_app().root.screen_switch_two(self,index)
+            # rint MyScreenManager.current_screen
+            # MyScreenManager.current='_second_screen_'
+            print
+            dir(App.get_running_app())
+            App.get_running_app().root.screen_switch_two(self, index)
 
-            print len(gdate1),'date1'
-            print len(gtime1),'gtime1'
-            print len(gjob1),'gjob1'
-            print len(gvenue1),'gvenue1'
-            print len(rv.data),'data'
+            print
+            len(gdate1), 'date1'
+            print
+            len(gtime1), 'gtime1'
+            print
+            len(gjob1), 'gjob1'
+            print
+            len(gvenue1), 'gvenue1'
+            print
+            len(rv.data), 'data'
         else:
             print("selection removed for {0}".format(rv.data[index]))
 
@@ -718,43 +818,47 @@ class RV(RecycleView):
     def __init__(self, **kwargs):
         self.data = []
         parse()
-        print "TESTTESTTESTTEST"
+        print
+        "TESTTESTTESTTEST"
 
         super(RV, self).__init__(**kwargs)
         global items_2
         global items_1
-        #global date1
-        #global job1
-        #global venue1
-        #print time1
-        print gvenue1
-        paired_iter = zip(items_0,items_1, items_2,items_3,items_4,items_5,items_6,items_7,items_8,items_9,items_10,items_11,items_12,items_13)
-        print paired_iter,"HOLYCRAPMAN"
+        # global date1
+        # global job1
+        # global venue1
+        # print time1
+        print
+        gvenue1
+        paired_iter = zip(items_0, items_1, items_2, items_3, items_4, items_5, items_6, items_7, items_8, items_9,
+                          items_10, items_11, items_12, items_13)
+        print
+        paired_iter, "HOLYCRAPMAN"
         #
-        for i0,i1, i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13 in paired_iter:
-            d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5},'label7': {'text': i6},'label8': {'text': i7},'label9': {'text': i8},'label10': {'text': i9},'label11': {'text': i10}}
-            #d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5}}
+        for i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13 in paired_iter:
+            d = {'label1': {'text': i0}, 'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},
+                 'label5': {'text': i4}, 'label6': {'text': i5}, 'label7': {'text': i6}, 'label8': {'text': i7},
+                 'label9': {'text': i8}, 'label10': {'text': i9}, 'label11': {'text': i10}}
+            # d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5}}
 
             self.data.append(d)
-            print 'wtf man'
+            print
+            'wtf man'
         # can also be performed in a complicated one liner for those who like it tricky
         # self.data = [{'label2': {'text': i1}, 'label3': {'text': i2}} for i1, i2 in zip(items_1, items_2)]
-
 
 
 items2_1 = {'apple', 'banana', 'pear', 'pineapple'}
 items2_2 = {'dog', 'cat', 'rat', 'bat'}
 
 
-
-
-
 class TestApp(App):
     def build(self):
-
         return MyScreenManager()
+
     def storage(self):
         return self.user_data_dir
+
 
 if __name__ == '__main__':
     TestApp().run()
