@@ -12,6 +12,37 @@
     background_color: 0, 0, 0, 0
 
 #:import C kivy.utils.get_color_from_hex
+#:import Factory kivy.factory.Factory
+<MyPopup@Popup>:
+    title:'More Options'
+    auto_dismiss: False
+    size_hint:.8,.8
+
+    BoxLayout:
+        orientation:"vertical"
+        Button:
+            text:'Get directions:\n [ref=http://google.com/maps/search/?api=1&9332]google[/ref]'
+            markup: True
+            #on_ref_press:
+                #import webbrowser
+                #webbrowser.open(args[1])
+                #app.web(self,args[1])
+            on_press:
+                #app.root.web()
+                #url = "http://www.google.com"
+                #ios.IOSWebView().open(url, width, height)
+        Button:
+            text:'Email Parking Info'
+            #on_press:
+                #app.root.email()
+        Button:
+            text:'Add to Calendar'
+            #on_press :
+               #app.root.addcal()
+            #text:str(app.root.ids.fourth_screen)
+        Button:
+            text: 'Done!'
+            on_release: root.dismiss()
 
 <RTextInput@TextInput>:
     font_size: '14dp'
@@ -43,6 +74,38 @@
             ellipse: self.pos[0] - self.size[1]/2.0, self.pos[1], self.size[1], self.size[1], 180, 360
         Line:
             ellipse: self.size[0] + self.pos[0] - self.size[1]/2.0, self.pos[1], self.size[1], self.size[1], 360, 540
+
+<RTextInput2@Button>:
+    font_size: '14dp'
+    background_color: 0,0,0,0
+    cursor_color: C('#ffffff')
+    canvas.before:
+        Color:
+            rgba: C('#ffffff')
+    canvas.after:
+        Color:
+            rgb: C('#0f192e')
+        Ellipse:
+            angle_start:180
+            angle_end:360
+            pos:(self.pos[0] - self.size[1]/2.0, self.pos[1])
+            size: (self.size[1], self.size[1])
+        Ellipse:
+            angle_start:360
+            angle_end:540
+            pos: (self.size[0] + self.pos[0] - self.size[1]/2.0, self.pos[1])
+            size: (self.size[1], self.size[1])
+        Color:
+            rgba: C('#3f92db')
+        Line:
+            points: self.pos[0] , self.pos[1], self.pos[0] + self.size[0], self.pos[1]
+        Line:
+            points: self.pos[0], self.pos[1] + self.size[1], self.pos[0] + self.size[0], self.pos[1] + self.size[1]
+        Line:
+            ellipse: self.pos[0] - self.size[1]/2.0, self.pos[1], self.size[1], self.size[1], 180, 360
+        Line:
+            ellipse: self.size[0] + self.pos[0] - self.size[1]/2.0, self.pos[1], self.size[1], self.size[1], 360, 540
+
 
 
 <MyScreenManager>:
@@ -346,40 +409,84 @@
                 text:'Confirm'
             Button:
                 padding:150,150
-                #text:"Demo"
+                text:"More"
                 #Image:
 
 
-                background_normal:'tex.png'
+                #background_normal:'tex.png'
                 size_hint:1,1
                 halign:'center'
                 valign:'center'
                 width:50
                 height:50
+                on_release: Factory.MyPopup().open()
+
 
 
 
 <ThirdScreen>:
     name: '_third_screen_'
     BoxLayout:
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'images/r.png'
         orientation:'vertical'
+
         BoxLayout:
             size_hint_y: 20
-            canvas.before:
-                Color:
-                    rgba: C('#3f92db')
-                Rectangle:
-                    pos:self.pos
-                    size:self.size
+            #canvas.before:
+
+
+                #Color:
+                #    rgba: C('#000000')
+                #Rectangle:
+
+                    #pos:self.pos
+                    #size:self.size
+                    #source:'images/r.png'
         BoxLayout:
             orientation: 'vertical'
             size_hint_y: 80
             canvas:
+
                 Color:
-                    rgba: C('#18294a')
+                    rgba: (.5,.5,.5,.6)
                 Rectangle:
                     pos:self.pos
                     size:self.size
+            BoxLayout:
+                size_hint_y: 10
+            BoxLayout:
+                size_hint_y: 20
+                orientation:'vertical'
+                Label:
+                    size_hint_y: 8
+                    text: 'Email'
+                    color: C('#ffffff')
+                    font_size:'20dp'
+                    padding: 5,5
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'center'
+                BoxLayout:
+                    size_hint_y: 8
+                    BoxLayout:
+                        size_hint_x: 25
+                    BoxLayout:
+                        size_hint_x: 50
+                        canvas.before:
+                            Color:
+                                rgba: C('#0f192e')
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                        RTextInput:
+                            id:email
+                            text:'kevincwulff@gmail.com'
+                    BoxLayout:
+                        size_hint_x: 25
             BoxLayout:
                 size_hint_y: 10
             BoxLayout:
@@ -407,8 +514,13 @@
                                 pos: self.pos
                                 size: self.size
                         RTextInput:
+                            id:password
+                            password:'True'
+                            text:'blablabla'
                     BoxLayout:
                         size_hint_x: 25
+
+            ####
             BoxLayout:
                 size_hint_y: 10
             BoxLayout:
@@ -416,7 +528,7 @@
                 orientation:'vertical'
                 Label:
                     size_hint_y: 8
-                    text: 'Confirm'
+                    text: ''
                     color: C('#ffffff')
                     font_size:'20dp'
                     padding: 5,5
@@ -435,11 +547,30 @@
                             Rectangle:
                                 pos: self.pos
                                 size: self.size
-                        RTextInput:
+                        RTextInput2:
+                            text:'login'
+                            on_press:
+
+                                root.login('fuck off',email,password)
+                                root.manager.transition.direction = 'down'
+                                root.manager.current = '_fourth_screen_'
+
                     BoxLayout:
                         size_hint_x: 25
+                        #RTextInput2:
+                            #text:'test2'
+
+
+            ###
             BoxLayout:
                 size_hint_y: 40
+                RTextInput2:
+                    text:'test1'
+                    on_press:
+                        root.loadcache()
+                        root.manager.transition.direction = 'down'
+                        root.manager.current = '_fourth_screen_'
+
 
 <FourthScreen>:
     id:'WHAT'

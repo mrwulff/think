@@ -55,7 +55,7 @@ items_14 = []
 items_15 = []
 items_16 = []
 
-print
+##print
 type(items_1), "WOWOWOWOWOWOOWOWOW"
 # items_1.add()
 # items_2.add()
@@ -72,7 +72,7 @@ gtype1 = {'', }
 gpos1 = {'', }
 gstatus1 = {'', }
 gnotes1 = {'', }
-
+index5=101
 # import sys
 # reload(sys)
 # sys.setdefaultencoding('utf8')
@@ -107,41 +107,43 @@ def check(joob, date12, time12, venue12, loc12, show12, type12, status12, pos12,
     global gloc1
     gloc1.add(loc12)
 
-    print
+    ##print
     date12, time12, venue12, 'LOCAL HERO'
 
 
 import io
 
 
+def loadcache2(self, a, b, c):
+    parse()
+
 def check_time(date, time):
     time = str(time)
     time2 = (time)
     date = str(date)
 
-    print(date, time)
+    ##print(date, time)
 
     d1, d2, d3 = str.split(date, '/')
     newd = d1 + '/' + d2
 
     t1, t2 = str.split(time2, ':')
     if int(t1) > 12:
-        print('over12 ', t1)
+        ###print('over12 ', t1)
         t1 = int(t1) - 12
         time2 = str(t1) + ':' + t2 + ' PM'
     else:
         time2 = time2 + ' AM'
-    print
+    ##print
     time2
 
     aa = datetime.strptime(date + ' ' + time, '%m/%d/%Y %H:%M')
-    # print (aa)
+    # ##print (aa)
 
     now = (datetime.now())
 
     diff = now - aa
-    print
-    diff
+
     global past
     diffh = humanize.naturaltime(now - aa)
     past = False
@@ -153,9 +155,7 @@ def check_time(date, time):
     else:
         diff2 = diff
     day = ''
-    hours = ''
-    minutes = ''
-    # print("MMMMM ", diff2)
+
 
     try:
         day, hours = str.split(str(diff2), ' days, ')
@@ -164,70 +164,73 @@ def check_time(date, time):
             day = day + ' day, '
         else:
             day = day + ' days, '
-        # print('``````many days')
+
 
 
     except:
         try:
-            # print(diff2, 'GODAMN')
+            # ##print(diff2, 'GODAMN')
             hours = str(diff2)
-            # print('`````````````0 days')
+            # ##print('`````````````0 days')
         except:
-            # print('35234523452345234523452345')
-            # print(diff2, '         WHY THE FUCK')
+
             day, hours = str.split(str(diff2), ' day, ')
-            # print('``````````1 day')
-    # print("NNNNNN")
+            # ##print('``````````1 day')
+    # ##print("NNNNNN")
 
     hours, minutes, junk = str.split(hours, ':')
-    # print(hours)
-    # print("OOOOOOOOO")
+    # ##print(hours)
+    # ##print("OOOOOOOOO")
     hours = str(hours)
     if hours == '0':
 
-        # print('ppppppppppp')
+
 
         hours = ''
     else:
-        # print(hours, '    hours')
+        # ##print(hours, '    hours')
         try:
             day, hours = str.split(hours, ', ')
             day = day + ', '
         except:
-            print('dumb')
-        # print hours
+            ###print('dumb')
+            pass
+        # ##print hours
         ##hours = str(int(hours))
         if int(hours) == 1:
             hours = hours + ' hour '
         else:
             hours = hours + ' hours '
-    # print('asdfadsf')
+    # ##print('asdfadsf')
     if str(minutes) == 1:
         minutes = str(int(minutes)) + ' minute'
     else:
         minutes = str(int(minutes)) + ' minutes'
-    # print('erererer')
+    # ##print('erererer')
 
     if past == False:
-        # print('ok')
+        # ##print('ok')
         try:
             a = day + hours + minutes + ' Ago'
         except:
             a = 'ERROR'
-        # print('no2')
+        # ##print('no2')
     else:
-        # print('no3')
+        # ##print('no3')
         try:
             a = day + hours + minutes + ' Away'
         except:
             a = 'ERROR2'
-        # print('no4')
-    # print a
+        # ##print('no4')
+    # ##print a
     return (a, time2)
 from datetime import *
 import time
 import humanize
 from time import mktime
+import webbrowser
+#def web(self):
+#    webbrowser.open('http://www.anywebsite.domain')
 def updated(self,filename):
     if True:
         if filename=='':
@@ -241,55 +244,56 @@ def updated(self,filename):
         fc = datetime.fromtimestamp(mktime(fc))
         now = datetime.fromtimestamp(mktime(now))
         difh=humanize.naturaldelta(now-fc)
-        print difh
+        ##print difh
     #MyScreenManager.ids.first_screen.ids.status.text = str('Updated ' + difh + ' ago.')
-    #print dir(self.ids.status)
+    ###print dir(self.ids.status)
         return difh
     #except:
      #   return ''
 def parse_name():
 
     c = App.get_running_app().storage()
-    print((c))
+    ##print((c))
     go=True
     try:
         with io.open(c + 'cache.html', 'r',encoding='utf-8') as f:
 
             aaa=f.readlines()
             aaa2=f.read()
-            print('ASSHOLE')
+            ##print('ASSHOLE')
     except:
-        print 'WTF YOU ASS'
+        ##print 'WTF YOU ASS'
         go=False
         pass
     f=''
     l=''
 
     if go==True:
-        #print aaa
+        ###print aaa
         for line in aaa:
-            print line
+            ##print line
             if 'lblEmp' in line:
-                print line
+                ##print line
                 line=unicode.split(line,'>')
                 line=unicode.split(line[1],'<')
-                #print line[0]
+                ###print line[0]
                 l,f=unicode.split(line[0],', ')
-                #print f,l
+                ###print f,l
         with io.open(c + 'cache.html', 'r', encoding='utf-8') as f2:
             aaa2 = f2.read()
-        #print aaa2
+        ###print aaa2
         soup = BeautifulSoup(aaa2, 'html.parser')
-        #print(soup.prettify())
-        ##print(soup.prettify())
+        ###print(soup.prettify())
+        ####print(soup.prettify())
         a= list(soup.children)
         zz= soup.select('tr')
-        #print str(len (zz))
+        ###print str(len (zz))
     if len(f)>0:
         return f,l,str(len (zz))
     else:
         return 'No cache found',''
 def parse():
+    ##print 'pparse'
     '''
     date1=''
     time1=''
@@ -303,8 +307,12 @@ def parse():
     status1=''
     notes1=''
     '''
+    ##print App,'App'
+    ###print App.get_running_app()
+    ###print dir(App.get_running_app())
+    ###print App.storage()
     c = App.get_running_app().storage()
-    print((c))
+    print((c)),'PATH TO SAVE'
     go = True
     try:
         with io.open(c + 'cache.html', 'r', encoding='utf-8') as f:
@@ -317,54 +325,63 @@ def parse():
     if go == True:
         items_14=[]
         global onejob
-        # print type(aaa)
+        # ##print type(aaa)
         aaa = aaa.replace(u'\u2019', "'")
         aaa = aaa.replace(u'\xa9', 'c')
         aaa = aaa.replace('©', 'cc')
-        # print aaa
-        # print aaa
-        # from pyquery import PyQuery
-        # html = aaa
-        # pq = PyQuery(html)
+
         soup = BeautifulSoup(aaa, 'html.parser')
-        # print(soup.prettify())
         a = list(soup.children)
         zz = soup.select('tr')
-        # print zz
-        # print len(zz)
+
+
         onejob = []
-        print
-        type(onejob)
-        onejob = []
-        print
-        type(onejob)
-        for g in range(len(zz)):
-            # print g/14,(g%14)-1,zz[g]
-            # print type(zz)
+
+        for g in range(1,len(zz)-1):
+            ###print zz[g],'parser',g
+
             a2 = (zz[g])
-            # print dir(a2)
+            # ##print dir(a2)
             az3 = list(a2.children)
-            # print az3
+            # ##print az3
             job = []
+            test=[]
             for j in range(len(az3)):
+                #print az3[j]
 
                 az4 = az3[j]
+                print az4,'az5',g
                 try:
-                    # print az4.text
+                    try:
+                        cc=list(az4.children)
+                        print cc,'CCCCC'
+                        ccc=list(cc.children)
+                        print ccc,'morec'
+                        #job.append(str(cc))
+                    except:
+                        print 'nochild'
                     job.append(az4.text)
+                    # ##print az4.text
+
                     # onejob[g]=appendaz4.text
                 except:
                     ''
-                    # print az4,'loll'
-                # print dir(az4)
-            print
+                    #job.append('Fail')
+                    print az4,'ax4'
+                    test.append(az4)
+                    #job.append(az4)
+                    #job.append(az4.text)
+                    # ##print az4,'loll'
+                # ##print dir(az4)
+            ###print
             len(job)
             onejob.append(job)
-        # print onejob
-        # print g
-
+        # ##print onejob
+        # ##print g
+        print test,'test'
         if len(onejob) > 0:
-            for q in range(1, len(onejob[0]) - 1):
+            for q in range(1, len(onejob) ):
+                print onejob[q],'onejobq'
                 # items_1.add( onejob[q][1])
                 # items_2.add(onejob[q][2])
                 # items_3.add(onejob[q][3])
@@ -384,78 +401,39 @@ def parse():
                 items_12.append(onejob[q][12])
                 items_13.append(onejob[q][13])
                 # items_14.append(onejob[q][14])
+        print items_12,'000'
         for z in range(len(items_10)):
             t = items_0[z]
             d = items_1[z]
-            print(t, d, 'ratfuck')
-            aa, tim2 = check_time(t, d)
-            items_14.append(aa)
-            items_15.append(tim2)
-            print
-            aa
-        '''
-        try:
 
-            junk = stuff[13]
-
-            date1 = stuff[0 + o]
-            time1 = stuff[1 + o]
-            job1 = stuff[2 + o]
-            show1 = stuff[3 + o]
-            venue1 = stuff[4 + o]
-            loc1 = stuff[5 + o]
-            client1 = stuff[6 + o]
-            type1 = stuff[7 + o]
-            pos1 = stuff[8 + o]
-            status1 = stuff[10 + o]
-            notes1 = stuff[11 + o]
-
-
-        except:
-
-            date1 = stuff[0]
-            time1 = stuff[1]
-            job1 = stuff[2]
-            show1 = stuff[3]
-            venue1 = stuff[4]
-            loc1 = stuff[5]
-            client1 = stuff[6]
-            type1 = stuff[7]
-            pos1 = stuff[8]
-            status1 = stuff[10]
-            notes1 = stuff[11]
-            print 'wfff'
-            "SSDFSFSDFSDFSDF"
-    '''
-    '''
-
-        # print junk
-        print
-        date1
-
-        if date1 == 'Date' or date1 == '0':
-            # print 'init'
-            'junk'
-        else:
-            print date1, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'
-            print
-            date1
             try:
-                m, d, y = string.split(date1, '/')
-                date1 = y + '/' + m + '/' + d
+                aa, tim2 = check_time(t, d)
+
+                items_14.append(aa)
+                items_15.append(tim2)
             except:
-                print date1
-                print die
-                #date1, 'SDLFKJ :SDLKFJ:SLDKFJ:SLKFDJ:LSKFD'
-    '''
+                items_14.append('FailTimei')
+                items_15.append('FailTime15')
+
+
+
+    ###print onejob,'parseone'
 
     # joob = date1 + ' ' + time1 + ' ~ ' + venue1 + ' ~ ' + loc1 + ' ~ ' + show1 + ' ~  ' + client1 + ' ~ ' + type1 + ' ~ ' + pos1 + ' ~ ' + status1 + ' ~ ' + job1 + ' ~ ' + notes1
-    # print joob
+    # ##print joob
 
     # check(joob, date1, time1, venue1, loc1, show1, type1, status1, pos1, notes1, client1, job1)
-    return items_14,items_15
-
-
+    try:
+        return items_14,items_15
+    except:
+        return([0],[0])
+'''
+class MyPopup():
+    def web(self):
+        ##print 'omg'
+    def open(self):
+        ##print 'toots'
+'''
 class FirstScreen(Screen):
     def sslwrap(self, func):
         @wraps(func)
@@ -466,28 +444,28 @@ class FirstScreen(Screen):
         return bar
 
     def login(self, b, c, d):
-        print
+        ##print
         'calculate'
         # import  urllib3
         ssl.wrap_socket = self.sslwrap(ssl.wrap_socket)
 
         # requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = ('DES-CBC3-SHA')
 
-        # print (urllib3.util.ssl_.DEFAULT_CIPHERS),'urldc'
+        # ##print (urllib3.util.ssl_.DEFAULT_CIPHERS),'urldc'
 
         global now
         # ssl._DEFAULT_CIPHERS = ('DES-CBC3-SHA')
         ssl.verify = False
-        # print ssl._DEFAULT_CIPHERS,'dc'
+        # ##print ssl._DEFAULT_CIPHERS,'dc'
         global browser
-        print(ssl.OPENSSL_VERSION_INFO), 'test'
+        ##print(ssl.OPENSSL_VERSION_INFO), 'test'
         # ssl._create_default_https_context
-        print
-        print
-        print
-        print(ssl.SSLSocket.cipher)
-        # print dir(ssl_.wrap_socket)
-        # print poo
+        ##print
+        ##print
+        ##print
+        ##print(ssl.SSLSocket.cipher)
+        # ##print dir(ssl_.wrap_socket)
+        # ##print poo
 
         # PE_LOGIN = 'http://www.thinkrhino.com/employee/lasvegas/'
         PE_LOGIN = 'https://www.thinkrhino.com/employee/lasvegas/index.aspx'
@@ -495,7 +473,7 @@ class FirstScreen(Screen):
         # PE_LOGIN='http://google.com'
         # PE_COUNTRIES='https://yahoo.com'
         import operator
-        print
+        ##print
         c.text
 
         USERNAME = c.text
@@ -503,7 +481,7 @@ class FirstScreen(Screen):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         # aaa=open(dir_path+'/test2.html','wb')
         browser = mechanize.Browser()
-        # print dir(browser)
+        # ##print dir(browser)
         pass
         browser.set_handle_robots(False)
         browser.set_handle_equiv(False)
@@ -514,31 +492,31 @@ class FirstScreen(Screen):
         browser.select_form(name="ctl00")
         browser['emailaddress'] = USERNAME
         browser['mypassword'] = PASSWORD
-        # print (browser)
-        # print browser.title
+        # ##print (browser)
+        # ##print browser.title
 
         res = browser.submit()
-        # print dir(res)
-        # print res.header_items
-        # print res.get_data()
+        # ##print dir(res)
+        # ##print res.header_items
+        # ##print res.get_data()
 
         res = browser.open(PE_COUNTRIES)
         aa = res.get_data()  # HTML source of the page
 
-        print(browser, 'REAL BROWSER')
+        ##print(browser, 'REAL BROWSER')
 
         # now= (datetime.now())
-        print
+        ##print
         type(aa)
-        print(dir(res))
-        print
+        ##print(dir(res))
+        ##print
         res.info
         u = ''
         for i in res.readlines():
-            # print i
+            # ##print i
             try:
                 if "allrights" in i or 'copyright -' in i or 'ino Women’s Cold Crew P' in i:
-                    print
+                    ##print
                     i, 'copy1'
                     i = ''
 
@@ -546,18 +524,18 @@ class FirstScreen(Screen):
                 u = u + (i)
             except:
 
-                print
+                ##print
                 'fauil', i
 
         c = App.get_running_app().storage()
-        print((c))
+        ##print((c))
         b = open(str(c) + 'cache.html', 'w')
         b.write(u)
         b.close()
 
     def loadcache(self, a, b, c):
         parse()
-        #print date1
+        ###print date1
         # a, b
 
     pass
@@ -565,39 +543,45 @@ class FirstScreen(Screen):
 
 class SecondScreen(Screen):
     # def __init__(self):
-    #    print 'jesus'
+    #    ##print 'jesus'
     def wow(self):
-        # print a
-        # print'omg'
-        print
+        # ##print a
+        # ##print'omg'
+        ##print
         self
-        # print dir(self)
-        print
+        # ##print dir(self)
+        ##print
         self.manager
-        print(dir(self.manager))
-        print
+        ##print(dir(self.manager))
+        ##print
         dir(self.manager.screen_names)
         # self.lbl1.text = 'wo2w'
         self.random_number = items_1[3]
         pass
 
-    print
+    ##print
     dir(App.get_running_app()), 'trtr'
 
     app = App.get_running_app()
-    print
+    ##print
     app, '808'
-    print(dir(app)), '9009'
+    ##print(dir(app)), '9009'
     # item_1=['w']*4
     # random_number = item_1[3]
 
-    print
-    'fuck'
+
     pass
 
 
 class ThirdScreen(Screen):
-    pass
+    #parse()
+    ##print 'wow'
+    def loadcache(self):
+        #camera.take_picture()
+        #webbrowser.open('comgooglemapsurl://www.google.com/maps/search/?api=1&query=mgm+grand')
+        #webbrowser.open( 'comgooglemapsurl://www.google.com/maps/search/?api=1&query=centurylink+field')
+        parse()
+
 
 
 class FourthScreen(Screen):
@@ -611,10 +595,16 @@ sm.add_widget(ThirdScreen())
 sm.add_widget(FourthScreen())
 
 color_ = [.2, .2, .2, 1]
-# print type(color_1)
-# print color_1,'wowow'
+# ##print type(color_1)
+# ##print color_1,'wowow'
 color_1 = [.1, .1, .1, 1]
 clist = [color_, color_1]
+
+#class MyPopup(BoxLayout):
+#    def web(self):
+#        ##print 'ommmmgg'
+#    def open(self):
+#        ##print 'what'
 
 
 class MyScreenManager(ScreenManager):
@@ -625,11 +615,11 @@ class MyScreenManager(ScreenManager):
 
     def screen_switch_one(self, dt):
         self.current = '_first_screen_'
-        print 'loading first screen'
+        ##print 'loading first screen'
         a = updated(self, '')
         try:
             f, l, j = parse_name()
-            print a,f,l,j,'parsename'
+            ##print a,f,l,j,'parsename'
         except:
             f, l, j = parse_name()
             f = ''
@@ -637,20 +627,21 @@ class MyScreenManager(ScreenManager):
             self.ids.first_screen.ids.status.text = str(f + ' ' + l + ':' + j + ' jobs\nUpdated ' + a + ' ago.\n')
         # Clock.schedule_once(self.screen_switch_two, 2)
         root = App.get_running_app().root
-        print
+        ##print
         root.ids.viewkeys
-        print
+        ##print
         dir(root.ids.viewkeys)
-        print
+        ##print
         'why'
 
     def screen_switch_two(self, dt, index):
+        global index5
         self.current = '_second_screen_'
-        # print dt
-        # print index
-        print 'piss'
+        # ##print dt
+        # ##print index
+        ##print 'piss'
         items_14,items_15=parse()
-        print items_14
+        ##print items_14
 
         self.ids.second_screen.ids.second_screen_label.text = str(items_0[index])
         self.ids.second_screen.ids.second_screen_label1.text = items_14[index]
@@ -668,11 +659,11 @@ class MyScreenManager(ScreenManager):
         self.ids.second_screen.ids.second_screen_label12.text = items_11[index]
         self.ids.second_screen.ids.second_screen_label13.text = items_12[index]
         self.ids.second_screen.ids.second_screen_label14.text = items_13[index]
-        print
+        ##print
         self.ids.second_screen.ids.second_screen_label10.background_color, 'gtt'
 
         # self.ids.second_screen.ids.second_screen_label.font_size=10
-        print
+        ##print
         i = 0
         j = 1
         scl = []
@@ -693,19 +684,19 @@ class MyScreenManager(ScreenManager):
         scl.append(self.ids.second_screen.ids.second_screen_label13.background_color)
         scl.append(self.ids.second_screen.ids.second_screen_label14.background_color)
         blankc = [0] * len(scl)
-        print
+        ##print
         blankc, 'bc', len(scl)
         for q in range(len(scl)):
             if q % 2 == 0:
-                # print scl[q],'red'
+                # ##print scl[q],'red'
                 # scl[q]=color_
 
                 blankc[q] = color_
             else:
                 blankc[q] = color_1
-            print
+            ##print
             scl[q], 'blue'
-        print
+        ##print
         blankc, 'blankc'
         self.ids.second_screen.ids.second_screen_label4.background_color = blankc[0]
         self.ids.second_screen.ids.second_screen_label1.background_color = blankc[1]
@@ -725,18 +716,19 @@ class MyScreenManager(ScreenManager):
         self.ids.second_screen.ids.second_screen_label14.background_color = blankc[14]
 
         try:
-            print
+            ##print
             items_13[index], '13'
         except:
-            print
+            ##print
             'fail13'
         try:
-            print
+            ##print
             items_12[index], '14'
         except:
-            print
+            ##print
             'fail14'
         # Clock.schedule_once(self.screen_switch_three, 2)
+        index5=index
 
     def screen_switch_three(self, dt):
         self.current = '_third_screen_'
@@ -745,6 +737,60 @@ class MyScreenManager(ScreenManager):
     def screen_switch_four(self, dt):
         self.current = '_fourth_screen_'
         # Clock.schedule_once(self.screen_switch_one, 2)
+        '''
+    def web(a55):
+        ##print 'wowerzs',a55
+        ###print 'wow',a,b,index5
+        #webbrowser.open('http://www.anywebsite.domain')
+        a= onejob[index5+1]
+        # ##print a
+        ##print a[5]
+        b=a[5].replace(' ','+')
+        #webbrowser.open('comgooglemapsurl://www.google.com/maps/search/?api=1&query=mgm+grand')
+
+        u='https://www.google.com/maps/search/?api=1&query='+str(b)+''
+        ##print u
+        # u = 'https://www.go1ogle.com/maps/' + 'mgmgrand' + '"'
+        # ##print u
+        webbrowser.open(u)
+    def email(self):
+        a=onejob[index5+1]
+        ##print a
+        u='https://gmail.com/?subject = [prompt] & body = [prompt]'
+        u = 'https://www.google.com/maps/search/?api=1&query=' + str(8) + ''
+        u = 'https://www.gmail.com/?api=1&subject=' + str(8) + ''
+        to='lvscheduling@gmail.com'
+        to='kevincwulff@gmail.com'
+        sub='Parking Reimbursment'
+        date=a[0]
+        job=a[2]
+        show=a[3]
+        place=a[4]
+
+        u='mailto://'+to+'?subject='+sub+'?body='+date+'\n'+job+'\n'+show+'\n'+place+'\nThanks'
+        bo =  date + '\n' + job + '\n' + show + '\n' + place + '\nThanks'
+        ##print u
+        #Eryka.Adams@Clickdimensions.com?bcc=julie.patrick@clickdimensions.com&subject=RSVP'
+
+        #webbrowser.open(u)
+        email.send(recipient=to,
+                   subject=sub,
+                   text=bo
+                   )
+    
+    def addcal(self):
+        a = onejob[index5 + 1]
+        date = a[0]
+        time = a[1]
+        job = a[2]
+        show = a[3]
+        place = a[4]
+        u='https://calendar.google.com/calendar/r/eventedit?text=Your+Event+ Name & dates = '+date+time+' & details ='+date+time+job+show+place+'& location ='+place+ '& sf = true & output = xml & pli = 1'
+        ##print u
+        u = u.replace(' ', '+')
+        ##print u
+        webbrowser.open(u)
+        '''
 
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
@@ -784,13 +830,17 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         self.ids['id_label11'].text = data['label11']['text']  # As an alternate method of assignment
         blank2=(1,1,1,1)
         b=str((self.ids['id_label1'].text))
-        day = datetime.strptime(b, "%m/%d/%Y")
-        print type(day),'day'
+        try:
+            day = datetime.strptime(b, "%m/%d/%Y")
+            ##print type(day),'day'
 
-        today=strftime("%Y-%m-%d",gmtime())
-        today=datetime.strptime(today,"%Y-%m-%d")
-        print type(today),'today'
-        print day,today
+            today=strftime("%Y-%m-%d",gmtime())
+            today=datetime.strptime(today,"%Y-%m-%d")
+            ##print type(today),'today'
+            ##print day,today
+        except:
+            day='Failday'
+            today='Failtoday'
 
         try:
             ab10 = str((self.ids['id_label11'].text))
@@ -798,21 +848,21 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         except:
             ab10=''
         ab= str((self.ids['id_label4'].text))
-        #print ab
+        ###print ab
         ab= ab.lower()
 
-        print ab10
+        ##print ab10
 
 
         if day>today:
             pass
-            #print 'greater'
+            ###print 'greater'
             #blank2=[.5,.5,.5,1]
         if today>day:
-            print 'less'
+            ##print 'less'
             blank2=[.5,.5,.6,1]
         if today==day:
-            print'TODAY'
+            ##print'TODAY'
             blank2 = [.59, .59, .99, 1]
         if 'cancelled' in ab or 'canceled' in ab or 'cancelled' in ab10 or 'canceled' in ab10:
 
@@ -859,63 +909,66 @@ class SelectableLabel(RecycleDataViewBehavior, GridLayout):
         ''' Respond to the selection of items in the view. '''
         self.selected = is_selected
         if is_selected:
-            #print("selection changed to {0}".format(rv.data[index]))
+            ###print("selection changed to {0}".format(rv.data[index]))
             ##MyScreenManager.screen_switch_two(ScreenManager)
-            # print dir(MyScreenManager),'msm'
-            # print dir(MyScreenManager.screen_switch_four)
-            # print dir(MyScreenManager.current)
+            # ##print dir(MyScreenManager),'msm'
+            # ##print dir(MyScreenManager.screen_switch_four)
+            # ##print dir(MyScreenManager.current)
 
             # rint MyScreenManager.current_screen
             # MyScreenManager.current='_second_screen_'
-            print
+            ##print
             dir(App.get_running_app())
             App.get_running_app().root.screen_switch_two(self, index)
 
-            print
+            ##print
             len(gdate1), 'date1'
-            print
+            ##print
             len(gtime1), 'gtime1'
-            print
+            ##print
             len(gjob1), 'gjob1'
-            print
+            ##print
             len(gvenue1), 'gvenue1'
-            print
+            ##print
             len(rv.data), 'data'
         else:
             pass
-            print("selection removed for {0}".format(rv.data[index]))
+            ##print("selection removed for {0}".format(rv.data[index]))
 
 
 class RV(RecycleView):
     def __init__(self, **kwargs):
         self.data = []
+        ##print items_0,len(items_0),'items_0'
         parse()
-        print
+        ##print items_0,len(items_0),'items_0'
+        ##print
         "TESTTESTTESTTEST"
 
         super(RV, self).__init__(**kwargs)
         global items_2
         global items_1
-        # global date1
-        # global job1
-        # global venue1
-        # print time1
-        print
+
         gvenue1
         paired_iter = zip(items_0, items_1, items_2, items_3, items_4, items_5, items_6, items_7, items_8, items_9,
                           items_10, items_11, items_12, items_13)
-        print
-        paired_iter, "HOLYCRAPMAN"
+        print items_3
+        #print paired_iter, "HOLYCRAPMAN"
+        for i in range(len(paired_iter)):
+            print paired_iter[i],'man!',i
         #
         for i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13 in paired_iter:
             d = {'label1': {'text': i0}, 'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},
                  'label5': {'text': i4}, 'label6': {'text': i5}, 'label7': {'text': i6}, 'label8': {'text': i7},
                  'label9': {'text': i8}, 'label10': {'text': i9}, 'label11': {'text': i10}}
             # d = {'label1': {'text': i0},'label2': {'text': i1}, 'label3': {'text': i2}, 'label4': {'text': i3},'label5': {'text': i4},'label6': {'text': i5}}
+            print len(d), 'sngle data'
 
             self.data.append(d)
-            print
+            ##print
             'wtf man'
+        ##print self.data
+        ##print 'datadata'
         # can also be performed in a complicated one liner for those who like it tricky
         # self.data = [{'label2': {'text': i1}, 'label3': {'text': i2}} for i1, i2 in zip(items_1, items_2)]
 
@@ -923,6 +976,8 @@ class RV(RecycleView):
 items2_1 = {'apple', 'banana', 'pear', 'pineapple'}
 items2_2 = {'dog', 'cat', 'rat', 'bat'}
 
+from plyer import camera
+from plyer import email
 
 class TestApp(App):
     def build(self):
@@ -930,6 +985,21 @@ class TestApp(App):
 
     def storage(self):
         return self.user_data_dir
+    #def web(self,a,b):
+        ###print 'wow',a,b,index5
+        #webbrowser.open('http://www.anywebsite.domain')
+        #a= onejob[index5+1]
+        ###print a
+        ###print a[5]
+        #ab=a[5].replace(' '+'+')
+        #u='https://www.googl1e.com/maps/dir/?api=1&"'+str(a[5])+'"'
+        #u = 'https://www.go1ogle.com/maps/' + 'mgmgrand' + '"'
+        ###print u
+        #webbrowser.open(u)
+        #webbrowser.open('http://www.anywebsite.domain')
+        #camera.take_picture()
+        #email.send()
+
 
 
 if __name__ == '__main__':
