@@ -32,7 +32,7 @@ import os
 from bs4 import BeautifulSoup
 from time import *
 index = 99
-
+browser=''
 # items_1 = set()
 # items_2 = set()
 # items_3 = set()
@@ -333,6 +333,10 @@ def parse():
         soup = BeautifulSoup(aaa, 'html.parser')
         a = list(soup.children)
         zz = soup.select('tr')
+        print len(zz)
+        if len(zz)<1:
+            go=False
+    if go==True:
 
 
         onejob = []
@@ -350,25 +354,30 @@ def parse():
                 #print az3[j]
 
                 az4 = az3[j]
-                print az4,'az5',g
+                #print az4,'az5',g
                 try:
-                    try:
-                        cc=list(az4.children)
-                        print cc,'CCCCC'
-                        ccc=list(cc.children)
-                        print ccc,'morec'
-                        #job.append(str(cc))
-                    except:
-                        print 'nochild'
+
                     job.append(az4.text)
+
+                    if az4.text=='':
+                        job.append(az4)
+                        #print
+                    else:
+                        pass
+                        #print 'success', az4.text
                     # ##print az4.text
 
                     # onejob[g]=appendaz4.text
                 except:
-                    ''
+
                     #job.append('Fail')
-                    print az4,'ax4'
-                    test.append(az4)
+                    if len(az4)>10:
+                        #print 'long',az4
+                        job.append(str(az4))
+                    if len(az4)<10:
+                        #print 'short',az4
+                        #print az4,'ax4'
+                        test.append(az4)
                     #job.append(az4)
                     #job.append(az4.text)
                     # ##print az4,'loll'
@@ -378,10 +387,10 @@ def parse():
             onejob.append(job)
         # ##print onejob
         # ##print g
-        print test,'test'
+        #print test,'test'
         if len(onejob) > 0:
             for q in range(1, len(onejob) ):
-                print onejob[q],'onejobq'
+                #print onejob[q],'onejobq'
                 # items_1.add( onejob[q][1])
                 # items_2.add(onejob[q][2])
                 # items_3.add(onejob[q][3])
@@ -401,7 +410,7 @@ def parse():
                 items_12.append(onejob[q][12])
                 items_13.append(onejob[q][13])
                 # items_14.append(onejob[q][14])
-        print items_12,'000'
+        #print items_13,'000'
         for z in range(len(items_10)):
             t = items_0[z]
             d = items_1[z]
@@ -480,6 +489,7 @@ class FirstScreen(Screen):
         PASSWORD = d.text
         dir_path = os.path.dirname(os.path.realpath(__file__))
         # aaa=open(dir_path+'/test2.html','wb')
+        global browser
         browser = mechanize.Browser()
         # ##print dir(browser)
         pass
@@ -533,13 +543,35 @@ class FirstScreen(Screen):
         b.write(u)
         b.close()
 
-    def loadcache(self, a, b, c):
-        parse()
+
+
+
+
+    def savee(self, a, b, c):
+        #parse()
         ###print date1
         # a, b
 
-    pass
+        if True:
+            c = App.get_running_app().storage()
+            b = open(c + 'settings.html', 'w')
+            print App.get_running_app().root.ids
+            print dir(App.get_running_app().root.ids)
 
+            #print self.ids.first_screen.ids.email.text
+
+            b.write(App.get_running_app().root.ids.first_screen.ids.email.text+'##email##\n')
+            b.write(App.get_running_app().root.ids.first_screen.ids.password.text+'##password##')
+
+
+            #self.ids.first_screen.ids.email.text = str(line)
+        #except:
+            #print
+            #'coundt find settings'
+
+    pass
+    def loadcache(self,a,b,c):
+        parse()
 
 class SecondScreen(Screen):
     # def __init__(self):
@@ -571,12 +603,50 @@ class SecondScreen(Screen):
 
 
     pass
+    def confirm(self):
+        confable=False
+        print 'ONEJOB',onejob[index5+1],index5
+        try:
+            ht= onejob[index5 + 1][14]
+            h2 = str.split(str(ht), '"')
+            confable = True
+        except:
+            print 'nonconfirmable'
+            pass
+
+        if confable==True:
+            print type(browser)
+            if type(browser)==unicode:
+                print(browser, 'browser fail')
+            else:
+                browser.select_form(name="ctl00")
+                print(browser, 'browser 1')
+                control_t = browser.form.find_control("__EVENTTARGET")
+                control_a = browser.form.find_control("__EVENTARGUMENT")
+                print(browser, 'browser 2')
+                control_t.readonly = False
+                control_a.readonly = False
+
+                control_t.value = str(ht)
+                control_a.value = 'Confirm'
+                print(browser, 'browser 3')
+
+                response = browser.submit()
+                print(browser, 'browser 4')
+                aa = response.get_data()
+                print(browser, 'browser 5')
+
+                #aaa = open('aaa.html', 'wb')
+                #aaa.write((aa))
+                #aaa.close()
+                #browser.open('test2.html')
+
 
 
 class ThirdScreen(Screen):
     #parse()
     ##print 'wow'
-    def loadcache(self):
+    def loadcache(self, a, b, c):
         #camera.take_picture()
         #webbrowser.open('comgooglemapsurl://www.google.com/maps/search/?api=1&query=mgm+grand')
         #webbrowser.open( 'comgooglemapsurl://www.google.com/maps/search/?api=1&query=centurylink+field')
@@ -611,7 +681,7 @@ class MyScreenManager(ScreenManager):
 
     def __init__(self, **kwargs):
         super(MyScreenManager, self).__init__(**kwargs)
-        Clock.schedule_once(self.screen_switch_three, 0)
+        Clock.schedule_once(self.screen_switch_one, 0)
 
     def screen_switch_one(self, dt):
         self.current = '_first_screen_'
@@ -621,18 +691,45 @@ class MyScreenManager(ScreenManager):
             f, l, j = parse_name()
             ##print a,f,l,j,'parsename'
         except:
-            f, l, j = parse_name()
+            #f, l, j = parse_name()
             f = ''
-        if len(f) > 0:
-            self.ids.first_screen.ids.status.text = str(f + ' ' + l + ':' + j + ' jobs\nUpdated ' + a + ' ago.\n')
+        #if len(f) > 0:
+            #self.ids.first_screen.ids.status.text = str(f + ' ' + l + ':' + j + ' jobs\nUpdated ' + a + ' ago.\n')
         # Clock.schedule_once(self.screen_switch_two, 2)
         root = App.get_running_app().root
         ##print
         root.ids.viewkeys
         ##print
         dir(root.ids.viewkeys)
-        ##print
-        'why'
+        print 'why'
+
+        c = App.get_running_app().storage()
+
+        if True:
+            email=''
+            password=''
+            b=open(c + 'settings.html', 'r')
+
+            for line in b.readlines():
+                print line
+                if '##email##' in line:
+                    email,garbage=str.split(line,'##email')
+                if '##password##' in line:
+                    password, garbage = str.split(line, '##password')
+
+            self.ids.first_screen.ids.email.text = str(email)
+            self.ids.first_screen.ids.password.text = str(password)
+
+        #except:
+        #    print 'coundt find settings'
+        #    b=open(c+'settings.html','w')
+        #    b.write('test\ntest')
+        #    b.close()
+        #    print 'made settings'
+        print self.ids.first_screen.ids.email.text
+        print self.ids.first_screen.ids.password.text
+
+
 
     def screen_switch_two(self, dt, index):
         global index5

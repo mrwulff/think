@@ -121,8 +121,8 @@
 
 
 
-<FirstScreen>:
-    name: '_first_screen_'
+<ThirdScreen>:
+    name: '_third_screen_'
     #Label:
 
      #   text: "Hi I'm The First Screen"
@@ -407,6 +407,9 @@
                     root.manager.current = '_fourth_screen_'
             Button:
                 text:'Confirm'
+                on_press:
+                    root.confirm()
+
             Button:
                 padding:150,150
                 text:"More"
@@ -424,8 +427,8 @@
 
 
 
-<ThirdScreen>:
-    name: '_third_screen_'
+<FirstScreen>:
+    name: '_first_screen_'
     BoxLayout:
         canvas.before:
             Rectangle:
@@ -484,7 +487,7 @@
                                 size: self.size
                         RTextInput:
                             id:email
-                            text:'kevincwulff@gmail.com'
+                            text:''
                     BoxLayout:
                         size_hint_x: 25
             BoxLayout:
@@ -565,11 +568,20 @@
             BoxLayout:
                 size_hint_y: 40
                 RTextInput2:
-                    text:'test1'
+                    text:'Save Login Info'
                     on_press:
-                        root.loadcache()
+                        root.savee('fuck off',email,password)
+                        root.manager.transition.direction = 'down'
+                        root.manager.current = '_first_screen_'
+            BoxLayout:
+                size_hint_y: 40
+                RTextInput2:
+                    text:'demo'
+                    on_press:
+                        root.loadcache('fuck off',email,password)
                         root.manager.transition.direction = 'down'
                         root.manager.current = '_fourth_screen_'
+
 
 
 <FourthScreen>:
